@@ -40,7 +40,13 @@
   <h1> </h1>
   <form action="/action_page.php">
     Fecha de la Cita:
-    <input type="date" name="bday">
+    <!-- <input type="date" name="bday"> -->
+
+    <div class="input-field">
+        <input type="text" class="datepicker">        
+    </div>
+
+    
    
   </form>
   <h1> </h1>
@@ -72,4 +78,13 @@
         </div>
       </div>
     </footer>
+
+    <script>$('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year,
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Ok',
+        closeOnSelect: false // Close upon selecting a date,
+      });</script>
         

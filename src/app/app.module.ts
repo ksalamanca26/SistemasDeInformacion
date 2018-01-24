@@ -15,6 +15,8 @@ import { AsignacionPrivilegiosComponent } from './Components/asignacion-privileg
 import { AsignarFechaComponent } from './Components/Asignar-Fecha/Asignar-Fecha.component';
 import { RespuestosComponent } from './Components/respuestos/respuestos.component';
 import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesion.component';
+import { DashboardUsuarioComponent } from './Components/dashboard-usuario/dashboard-usuario.component';
+import { SideNavComponent } from './Components/side-nav/side-nav.component';
 
 
 
@@ -31,6 +33,8 @@ const appRoutes: Routes = [
   { path: 'asignacion-privilegios', component: AsignacionPrivilegiosComponent },
   { path: 'repuestos', component: RespuestosComponent },
   { path: 'iniciar-sesion', component: IniciarSesionComponent },
+  { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
+  { path: 'side-nav', component: SideNavComponent },
 ];
 
 @NgModule({
@@ -46,7 +50,9 @@ const appRoutes: Routes = [
     AsignacionPrivilegiosComponent,
     AsignarFechaComponent,
     RespuestosComponent,
-    IniciarSesionComponent
+    IniciarSesionComponent,
+    DashboardUsuarioComponent,
+    SideNavComponent
   ],
   imports: [RouterModule.forRoot(
       appRoutes,
