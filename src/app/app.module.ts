@@ -17,6 +17,10 @@ import { RespuestosComponent } from './Components/respuestos/respuestos.componen
 import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesion.component';
 import { DashboardUsuarioComponent } from './Components/dashboard-usuario/dashboard-usuario.component';
 import { SideNavComponent } from './Components/side-nav/side-nav.component';
+import { AboutComponent } from './Components/about/about.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { EliminarVehiculoComponent } from './Components/eliminar-vehiculo/eliminar-vehiculo.component';
+import { CancelarCitaComponent } from './Components/cancelar-cita/cancelar-cita.component';
 
 
 
@@ -35,6 +39,10 @@ const appRoutes: Routes = [
   { path: 'iniciar-sesion', component: IniciarSesionComponent },
   { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
   { path: 'side-nav', component: SideNavComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'eliminar-vehiculo', component: EliminarVehiculoComponent },
+  { path: 'cancelar-cita', component: CancelarCitaComponent },
 ];
 
 @NgModule({
@@ -52,7 +60,11 @@ const appRoutes: Routes = [
     RespuestosComponent,
     IniciarSesionComponent,
     DashboardUsuarioComponent,
-    SideNavComponent
+    SideNavComponent,
+    AboutComponent,
+    DashboardComponent,
+    EliminarVehiculoComponent,
+    CancelarCitaComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,
