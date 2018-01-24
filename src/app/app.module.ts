@@ -5,14 +5,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 import { MaterializeModule } from "angular2-materialize";
-import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
-import { InicioComponent } from './inicio/inicio.component';
-import { RegistroVehiculoComponent } from './registro-vehiculo/registro-vehiculo.component';
-import { SolicitarCitaComponent } from './solicitar-cita/solicitar-cita.component';
-import { GeneracionOrdenComponent } from './generacion-orden/generacion-orden.component';
-import { GenerarReporteComponent } from './generar-reporte/generar-reporte.component';
-import { AsignacionPrivilegiosComponent } from './asignacion-privilegios/asignacion-privilegios.component';
-import { AsignarFechaComponent } from './Asignar-Fecha/Asignar-Fecha.component';
+import { RegistroUsuarioComponent } from './Components/registro-usuario/registro-usuario.component';
+import { InicioComponent } from './Components/inicio/inicio.component';
+import { RegistroVehiculoComponent } from './Components/registro-vehiculo/registro-vehiculo.component';
+import { SolicitarCitaComponent } from './Components/solicitar-cita/solicitar-cita.component';
+import { GeneracionOrdenComponent } from './Components/generacion-orden/generacion-orden.component';
+import { GenerarReporteComponent } from './Components/generar-reporte/generar-reporte.component';
+import { AsignacionPrivilegiosComponent } from './Components/asignacion-privilegios/asignacion-privilegios.component';
+import { AsignarFechaComponent } from './Components/Asignar-Fecha/Asignar-Fecha.component';
+import { RespuestosComponent } from './Components/respuestos/respuestos.component';
+import { IniciarSesionComponent } from './Components/iniciar-sesion/iniciar-sesion.component';
 
 
 
@@ -27,6 +29,8 @@ const appRoutes: Routes = [
   { path: 'generar-reporte', component: GenerarReporteComponent },
   { path: 'Asignar-Fecha', component: AsignarFechaComponent },
   { path: 'asignacion-privilegios', component: AsignacionPrivilegiosComponent },
+  { path: 'repuestos', component: RespuestosComponent },
+  { path: 'iniciar-sesion', component: IniciarSesionComponent },
 ];
 
 @NgModule({
@@ -40,7 +44,9 @@ const appRoutes: Routes = [
     GeneracionOrdenComponent,
     GenerarReporteComponent,
     AsignacionPrivilegiosComponent,
-    AsignarFechaComponent
+    AsignarFechaComponent,
+    RespuestosComponent,
+    IniciarSesionComponent
   ],
   imports: [RouterModule.forRoot(
       appRoutes,

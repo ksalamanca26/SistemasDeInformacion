@@ -22,4 +22,8 @@ describe('AsignacionPrivilegiosComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
+
 });
+
