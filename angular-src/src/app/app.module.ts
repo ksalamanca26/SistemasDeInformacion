@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
 
+import {HttpModule} from '@angular/http';
+
 import { MaterializeModule } from "angular2-materialize";
 import { RegistroUsuarioComponent } from './Components/registro-usuario/registro-usuario.component';
 import { InicioComponent } from './Components/inicio/inicio.component';
@@ -24,7 +26,9 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { EliminarVehiculoComponent } from './Components/eliminar-vehiculo/eliminar-vehiculo.component';
 import { CancelarCitaComponent } from './Components/cancelar-cita/cancelar-cita.component';
 
-
+import {ValidateService} from './services/validate.service';
+import {FlashMessagesModule} from "angular2-flash-messages";
+import {AuthService} from './services/auth.service';
 
 
 const appRoutes: Routes = [
@@ -73,10 +77,12 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     FormsModule,
+    HttpModule,
     BrowserModule,
-    MaterializeModule
+    MaterializeModule,
+    FlashMessagesModule.forRoot()
   ],
-  providers: [],
+  providers: [ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
