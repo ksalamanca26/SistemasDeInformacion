@@ -18,6 +18,7 @@ var connection= new sequelize('taller', 'root', 'password', {
 });
 
 var Usuario = connection.import('../models/usuario');
+var Vehiculo = connection.import('../models/vehiculo');
 
 router.get('/register', (req, res, next) => {
 res.send('REGISTER');
@@ -35,7 +36,8 @@ console.log(password);
 	nombre : req.body.nombre,
 	apellido : req.body.apellido,
 	email : req.body.email,
-	contraseña : hash
+	contraseña : hash,
+	rol : req.body.rol
 	
 	
 	}).then(json => {
@@ -85,10 +87,11 @@ bcrypt.compare(req.body.password, usuario.dataValues.contraseña).then(function(
 	if(val){
 		res.json({success : true, 
 			user : {
-
+				id : usuario.dataValues.idUsuario,
 				nombre : usuario.dataValues.nombre,
 				apellido : usuario.dataValues.apellido,
-				email : usuario.dataValues.email
+				email : usuario.dataValues.email,
+				rol : usuario.dataValues.rol
 			}});
 	}
 	else{
@@ -142,6 +145,34 @@ catch(err){
 router.get('/validate', (req, res, next) => {
 res.send('VALIDATE');
 	});
+
+
+router.post('/registrar-v', (req, res, next) =>{
+try{
+	Vehiculo.create({
+
+	Serial : req.body.serial,
+	fechaRegistro : req.body.fecha,
+	Placa : req.body.placa,
+	Año : req.body.year,
+	idModelo : req.body.modelo,
+	idUsuario : req.body.idUsuario
+	
+	
+	}).then(json => {
+
+		res.json({success : true, msg : 'Vehiculo registrado'})
+	});
+
+
+}
+
+catch(err){
+
+	res.json({success : false, msg : 'Falla en el registro de vehiculo'})
+}
+
+});
 
 
 

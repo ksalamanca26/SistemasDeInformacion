@@ -1,9 +1,9 @@
 module.exports=function(sequelize, DataTypes){
 
-return sequelize.define('usuario', {
+return sequelize.define('vehiculo', {
 
 
-	idUsuario : {
+	idVehiculo : {
 
 		type : DataTypes.INTEGER,
 		primaryKey : true,
@@ -12,38 +12,43 @@ return sequelize.define('usuario', {
 
 	},
 
-	nombre : {
+	Serial : {
 
 		type : DataTypes.STRING,
 		allowNull : false
 
 	},
 
-	apellido : {
+	fechaRegistro : {
 
-		type : DataTypes.STRING,
+		type : DataTypes.DATE,
 		allowNull : false
 	},
 
 
-	email : {
+	Placa : {
 
 		type : DataTypes.STRING,
 		unique : true,
 		allowNull : false
 	},
 
-	contraseña : {
+	Año : {
 
 		type : DataTypes.STRING,
 		allowNull : false
 	},
 
-	rol : {
+	idModelo : {
 
 		type : DataTypes.INTEGER,
 		allowNull : false
+	},
 
+	idUsuario : {
+
+		type : DataTypes.INTEGER,
+		allowNull : false
 	}
 
 

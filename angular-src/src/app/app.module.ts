@@ -25,10 +25,12 @@ import { AboutComponent } from './Components/about/about.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { EliminarVehiculoComponent } from './Components/eliminar-vehiculo/eliminar-vehiculo.component';
 import { CancelarCitaComponent } from './Components/cancelar-cita/cancelar-cita.component';
+import { RegistrarAdmComponent } from './Components/registrar-adm/registrar-adm.component';
 
 import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {AuthService} from './services/auth.service';
+
 
 
 const appRoutes: Routes = [
@@ -49,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'eliminar-vehiculo', component: EliminarVehiculoComponent },
   { path: 'cancelar-cita', component: CancelarCitaComponent },
+  { path: 'registrar-adm', component: RegistrarAdmComponent },
 ];
 
 @NgModule({
@@ -71,6 +74,7 @@ const appRoutes: Routes = [
     DashboardComponent,
     EliminarVehiculoComponent,
     CancelarCitaComponent,
+    RegistrarAdmComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,

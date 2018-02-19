@@ -1,30 +1,30 @@
 <div class="container">
 <div class="row">
   <h1> Registro de Vehículo</h1>
-    <form class="col s12">
+    <form (submit) = "onRegisterSubmit()" class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">Serial del Motor</label>
+          <input id="serial" type="text" [(ngModel)]= "serial" name = "serial" class="validate">
+          <label for="serial">Serial del Motor</label>
         </div>
         <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Modelo</label>
+          <input id="modelo" type="text" [(ngModel)]= "modelo" name = "modelo" class="validate">
+          <label for="modelo">Modelo</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Año</label>
+          <input id="year" type="text" [(ngModel)]= "year" name = "year" class="validate">
+          <label for="year">Año</label>
         </div>
         <div class="input-field col s6">
-          <input id="email" type="text" class="validate">
-          <label for="email">Placa</label>
+          <input id="placa" type="text" [(ngModel)]= "placa" name = "placa" class="validate">
+          <label for="placa">Placa</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id=fecha type="text" class="datepicker">
+          <input id=fecha type="date"  [(ngModel)]= "fecha" name = "fecha" class="datepicker">
           <label for="fecha">Fecha admitido</label>
         </div>
        

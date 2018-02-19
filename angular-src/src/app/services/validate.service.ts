@@ -37,4 +37,23 @@ validateLogin(user){
 	}
 }
 
+
+validateRegisterV(vehiculo){
+
+
+if(vehiculo.placa == undefined || vehiculo.serial == undefined || vehiculo.modelo == undefined || vehiculo.fecha == undefined || vehiculo.year == undefined)
+{
+
+return false;
+
+}
+
+else{
+
+	return true;
+}
+
+
+}
+
 }

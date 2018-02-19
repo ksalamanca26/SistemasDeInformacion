@@ -31,7 +31,8 @@ email : String;
  		nombre : this.nombre,
  		apellido : this.apellido,
  		password : this.password,
- 		email : this.email
+ 		email : this.email,
+    rol : 1
  	}
 
  	  if(!this.validateService.validateRegister(user)){

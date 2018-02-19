@@ -42,9 +42,15 @@ export class IniciarSesionComponent implements OnInit {
 
   	this.authService.loginUser(user).subscribe(data =>{
   		if(data.success){
-
+        this.authService.storeUserData(data.user);
   			this.flashMessage.show("Bienvenido "+data.user.nombre, {cssClass : "alert-success", timeout : 5000});
-  			this.router.navigate(['/dashboard']);
+        if(data.user.rol ==1){
+          this.router.navigate(['/dashboard']);
+        }
+        else{
+          this.router.navigate(['/dashboard-usuario']);
+        }
+  			
   		}
 
   		else{

@@ -1,0 +1,287 @@
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: taller
+-- ------------------------------------------------------
+-- Server version	5.7.21-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cita`
+--
+
+DROP TABLE IF EXISTS `cita`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cita` (
+  `idCita` int(11) NOT NULL AUTO_INCREMENT,
+  `hora` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `idOrden` int(11) NOT NULL,
+  `idVehiculo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`idCita`),
+  KEY `idorden_idx` (`idOrden`),
+  KEY `idusuario_idx` (`idUsuario`),
+  KEY `idvehiculo_idx` (`idVehiculo`),
+  CONSTRAINT `idorden` FOREIGN KEY (`idOrden`) REFERENCES `orden` (`idOrden`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idusuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `idvehiculo` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cita`
+--
+
+LOCK TABLES `cita` WRITE;
+/*!40000 ALTER TABLE `cita` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cita` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modelo`
+--
+
+DROP TABLE IF EXISTS `modelo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modelo` (
+  `idModelo` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`idModelo`),
+  UNIQUE KEY `nombre_UNIQUE` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modelo`
+--
+
+LOCK TABLES `modelo` WRITE;
+/*!40000 ALTER TABLE `modelo` DISABLE KEYS */;
+INSERT INTO `modelo` VALUES (1,'Tesla Model 3');
+/*!40000 ALTER TABLE `modelo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orden`
+--
+
+DROP TABLE IF EXISTS `orden`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orden` (
+  `idOrden` int(11) NOT NULL AUTO_INCREMENT,
+  `Codigo` varchar(45) NOT NULL,
+  `herramientas` varchar(45) DEFAULT NULL,
+  `diagnostico` varchar(45) DEFAULT NULL,
+  `accesorios` varchar(45) DEFAULT NULL,
+  `llaves` varchar(45) DEFAULT NULL,
+  `Desperfectos` varchar(45) DEFAULT NULL,
+  `gato` varchar(45) DEFAULT NULL,
+  `caucho` varchar(45) DEFAULT NULL,
+  `foto` varchar(45) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`idOrden`),
+  KEY `idusuario_idx` (`idUsuario`),
+  CONSTRAINT `usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orden`
+--
+
+LOCK TABLES `orden` WRITE;
+/*!40000 ALTER TABLE `orden` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orden` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `privilegios`
+--
+
+DROP TABLE IF EXISTS `privilegios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `privilegios` (
+  `idPrivilegios` int(11) NOT NULL AUTO_INCREMENT,
+  `tipo` varchar(45) NOT NULL,
+  PRIMARY KEY (`idPrivilegios`),
+  UNIQUE KEY `idPrivilegios_UNIQUE` (`idPrivilegios`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `privilegios`
+--
+
+LOCK TABLES `privilegios` WRITE;
+/*!40000 ALTER TABLE `privilegios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `privilegios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `repuesto`
+--
+
+DROP TABLE IF EXISTS `repuesto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `repuesto` (
+  `idRepuesto` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(160) NOT NULL,
+  `serial` varchar(45) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  PRIMARY KEY (`idRepuesto`),
+  UNIQUE KEY `idRepuesto_UNIQUE` (`idRepuesto`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `repuesto`
+--
+
+LOCK TABLES `repuesto` WRITE;
+/*!40000 ALTER TABLE `repuesto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `repuesto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `contraseña` varchar(100) NOT NULL,
+  `rol` int(11) NOT NULL,
+  PRIMARY KEY (`idUsuario`),
+  UNIQUE KEY `idUsuario_UNIQUE` (`idUsuario`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'Kevin','Salamanca','k.salamanca@correo.unimet.edu.ve','prueba',1),(2,'Bob','El Constructor','bobconstruye@gmail.com','$2a$10$QJGuD10cPlhu1/BE69h69.WQ.Rt1fxpv/6XuR7IGNLczqwIkAIYr.',1),(3,'Ousmane','Dembelé','dembele11@gmail.com','$2a$10$Jvd6OzMezB4DM2aBxW.DUeT9K2BRW0EKSp.7gi9NuNkpMmhccw8LK',1),(4,'Rafael','Matienzo','mainframe@ibm.com','$2a$10$K5G.QchVlBLBsEE5s3cRceMxUAkbC5mYx8F69y.Dhep0Xpg2/t6IW',1),(7,'Lewis','Hamilton','lhamilton@yahoo.com','$2a$10$rdvLIgrhxnJKGZWCr5ll7ufS4HYNzumuqSvqvrsynXiEg56w056yK',1),(11,'Luis','Suárez','lsuarez9@gmail.com','$2a$10$ZAkDpycKptHBsBpJJstYp.vAvZVy01HeXqHPZnoBDEPv0DLa8atWO',1),(12,'Phillipe','Coutinho','pcoutinho@gmail.com','$2a$10$XOwkR9lZ9Nbtpn5rOb7L6eXN/hWjRM/QS96vSmFkc1gBCK8ZcpTEK',4),(13,'Toño','El Amable','tamable@gmail.com','$2a$10$dZANy3BVR96HLDw03vFFwuLIXGDuZTrOuTm8qwSUHiLZuSDWVPvDy',2);
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario_tiene_privilegios`
+--
+
+DROP TABLE IF EXISTS `usuario_tiene_privilegios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuario_tiene_privilegios` (
+  `idPrivilegio` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`idPrivilegio`,`idUsuario`),
+  KEY `fk_privilegios_has_usuario_usuario1_idx` (`idUsuario`),
+  KEY `fk_privilegios_has_usuario_privilegios1_idx` (`idPrivilegio`),
+  CONSTRAINT `a` FOREIGN KEY (`idPrivilegio`) REFERENCES `privilegios` (`idPrivilegios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `b` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario_tiene_privilegios`
+--
+
+LOCK TABLES `usuario_tiene_privilegios` WRITE;
+/*!40000 ALTER TABLE `usuario_tiene_privilegios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuario_tiene_privilegios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vehiculo`
+--
+
+DROP TABLE IF EXISTS `vehiculo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehiculo` (
+  `idVehiculo` int(11) NOT NULL AUTO_INCREMENT,
+  `Serial` varchar(60) NOT NULL,
+  `fechaRegistro` date NOT NULL,
+  `Placa` varchar(45) NOT NULL,
+  `Año` int(11) NOT NULL,
+  `idModelo` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  PRIMARY KEY (`idVehiculo`),
+  UNIQUE KEY `vehiculo_UNIQUE` (`idVehiculo`),
+  UNIQUE KEY `Placa_UNIQUE` (`Placa`),
+  KEY `Modelo_Carro_idx` (`idModelo`),
+  KEY `usuario_tiene_vehiculo_idx` (`idUsuario`),
+  CONSTRAINT `Vehiculo_tiene_Modelo` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idModelo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `usuario_tiene_vehiculo` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vehiculo`
+--
+
+LOCK TABLES `vehiculo` WRITE;
+/*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
+INSERT INTO `vehiculo` VALUES (2,' 6HK1XDHAA - 6HK1-XYSA - 3LD1 - 4LE2','2018-02-18','SR7-23A',2017,1,12);
+/*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vehiculo_tiene_repuesto`
+--
+
+DROP TABLE IF EXISTS `vehiculo_tiene_repuesto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehiculo_tiene_repuesto` (
+  `idVehiculo` int(11) NOT NULL,
+  `idRepuesto` int(11) NOT NULL,
+  KEY `vehiculo_idx` (`idVehiculo`),
+  KEY `repuesto_idx` (`idRepuesto`),
+  CONSTRAINT `repuesto` FOREIGN KEY (`idRepuesto`) REFERENCES `repuesto` (`idRepuesto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `vehiculo` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vehiculo_tiene_repuesto`
+--
+
+LOCK TABLES `vehiculo_tiene_repuesto` WRITE;
+/*!40000 ALTER TABLE `vehiculo_tiene_repuesto` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vehiculo_tiene_repuesto` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-02-18 21:10:41
