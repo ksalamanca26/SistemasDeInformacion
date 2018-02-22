@@ -155,7 +155,7 @@ try{
 	fechaRegistro : req.body.fecha,
 	Placa : req.body.placa,
 	Año : req.body.year,
-	idModelo : req.body.modelo,
+	Modelo : req.body.modelo,
 	idUsuario : req.body.idUsuario
 	
 	
@@ -173,6 +173,30 @@ catch(err){
 }
 
 });
+
+
+router.get('buscar-v', (req, res, next) =>{
+console.log("Prueba");
+	Vehiculo.find({
+
+		where : {
+			idUsuario : req.body.idUsuario
+		}
+
+	}).then(json =>{
+
+		if(json!=undefined){
+			console.log(json);
+		}
+		
+		else{
+			console.log("Esta undefined");
+		}
+
+
+	})
+
+  });
 
 
 

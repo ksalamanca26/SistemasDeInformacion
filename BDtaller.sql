@@ -26,14 +26,11 @@ CREATE TABLE `cita` (
   `idCita` int(11) NOT NULL AUTO_INCREMENT,
   `hora` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `idOrden` int(11) NOT NULL,
   `idVehiculo` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`idCita`),
-  KEY `idorden_idx` (`idOrden`),
   KEY `idusuario_idx` (`idUsuario`),
   KEY `idvehiculo_idx` (`idVehiculo`),
-  CONSTRAINT `idorden` FOREIGN KEY (`idOrden`) REFERENCES `orden` (`idOrden`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idusuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idvehiculo` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -226,17 +223,15 @@ CREATE TABLE `vehiculo` (
   `Serial` varchar(60) NOT NULL,
   `fechaRegistro` date NOT NULL,
   `Placa` varchar(45) NOT NULL,
+  `Modelo` varchar(45) NOT NULL,
   `Año` int(11) NOT NULL,
-  `idModelo` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   PRIMARY KEY (`idVehiculo`),
   UNIQUE KEY `vehiculo_UNIQUE` (`idVehiculo`),
   UNIQUE KEY `Placa_UNIQUE` (`Placa`),
-  KEY `Modelo_Carro_idx` (`idModelo`),
   KEY `usuario_tiene_vehiculo_idx` (`idUsuario`),
-  CONSTRAINT `Vehiculo_tiene_Modelo` FOREIGN KEY (`idModelo`) REFERENCES `modelo` (`idModelo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `usuario_tiene_vehiculo` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -245,7 +240,7 @@ CREATE TABLE `vehiculo` (
 
 LOCK TABLES `vehiculo` WRITE;
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` VALUES (2,' 6HK1XDHAA - 6HK1-XYSA - 3LD1 - 4LE2','2018-02-18','SR7-23A',2017,1,12);
+INSERT INTO `vehiculo` VALUES (4,'EMN6300R5U0273','2018-02-21','KL2-45R','Tesla Model 3',2018,12);
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-18 21:10:41
+-- Dump completed on 2018-02-21 23:55:06

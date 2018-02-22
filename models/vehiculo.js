@@ -39,9 +39,9 @@ return sequelize.define('vehiculo', {
 		allowNull : false
 	},
 
-	idModelo : {
+	Modelo : {
 
-		type : DataTypes.INTEGER,
+		type : DataTypes.STRING,
 		allowNull : false
 	},
 

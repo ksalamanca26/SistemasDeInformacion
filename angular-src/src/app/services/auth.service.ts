@@ -29,11 +29,15 @@ user : any;
 
   }
 
-  loadUserData(user){
+  loadUserData(){
 
 const data=localStorage.getItem('user');
 this.user=data;
 
+  }
+
+  getUser(){
+    return this.user;
   }
 
   logout(){
@@ -54,5 +58,13 @@ this.user=data;
     .map(res => res.json());
 
   }
+
+
+  buscarVehiculos(idUsuario){
+   this.http.get('http://localhost:3000/buscar-v',idUsuario);
+
+  }
+
+
 
 }

@@ -12,7 +12,7 @@ import {FlashMessagesService} from "angular2-flash-messages";
 export class RegistroVehiculoComponent implements OnInit {
 
 	serial : String;
-	modelo : number;
+	modelo : String;
 	fecha : Date;
 	placa : String;
 	year : number;
@@ -36,7 +36,7 @@ export class RegistroVehiculoComponent implements OnInit {
  	const vehiculo = {
 
  		serial : this.serial,
- 		modelo : 1,
+ 		modelo : this.modelo,
  		fecha : this.fecha,
  		placa : this.placa,
  		year : this.year,
