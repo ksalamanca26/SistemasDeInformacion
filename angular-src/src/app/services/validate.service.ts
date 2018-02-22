@@ -41,7 +41,14 @@ validateLogin(user){
 validateRegisterV(vehiculo){
 
 
-if(vehiculo.placa == undefined || vehiculo.serial == undefined || vehiculo.modelo == undefined || vehiculo.fecha == undefined || vehiculo.year == undefined)
+
+
+
+}
+
+validateRegisterC(cita){
+
+if(cita.fecha == undefined || cita.hora == undefined || cita.idVehiculo == undefined || cita.idUsuario == undefined)
 {
 
 return false;

@@ -1,32 +1,32 @@
 <div class="container">
 <div class="row">
     <h1> Solicitar Cita</h1>
-      <form class="col s6">
+      <form (submit)="onRegisterSubmit() class="col s6">
         <div class="row">
-          <form action="/action_page.php">
     Fecha de la Cita:
-    <input type="date" name="bday">
+    <input [(ngModel)]= "fecha" name = "fecha" type="date">
    
-  </form>
+
           <div class="input-field col s6">
-            <input id="last_name" type="text" class="validate">
+            <input [(ngModel)]= "hora" name = "hora" id="hora" type="text" class="validate">
             <label for="last_name">Hora</label>
           </div>
         </div>
 
+    <select [(ngModel)]= "idVehiculo" name = "idVehiculo" class="browser-default">
+      <option value="" disabled selected>Seleccione el vehículo</option>
+       <option *ngFor="let vehiculo of vehiculos" [ngValue]="vehiculo.idVehiculo">{{ vehiculo.Modelo }}</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Solicitar</button>
+    </form>
+  </div>
+</div>
+
         
 
-        <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Seleccione el vehículo</option>
-      <option></option>
-    </select>
-  </div>
+         
 
-         <button type="submit" class="btn btn-primary">Solicitar</button>
-      </form>
-    </div>
-  </div>
+
 
   <footer class="page-footer blue-grey darken-1"  >
       <div class="container">

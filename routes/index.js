@@ -19,6 +19,7 @@ var connection= new sequelize('taller', 'root', 'password', {
 
 var Usuario = connection.import('../models/usuario');
 var Vehiculo = connection.import('../models/vehiculo');
+var Cita = connection.import('../models/cita');
 
 router.get('/register', (req, res, next) => {
 res.send('REGISTER');
@@ -175,28 +176,65 @@ catch(err){
 });
 
 
-router.get('buscar-v', (req, res, next) =>{
-console.log("Prueba");
-	Vehiculo.find({
+router.post('/buscar-v', (req, res, next) =>{
+
+	try{
+	Vehiculo.findAll({
 
 		where : {
-			idUsuario : req.body.idUsuario
+			idUsuario : req.body.id
 		}
 
 	}).then(json =>{
 
 		if(json!=undefined){
-			console.log(json);
+			res.send(json);
 		}
 		
 		else{
-			console.log("Esta undefined");
+			res.json({success : false, msg : 'Esta undefined'})
 		}
 
 
-	})
+	})	
+	}
+
+	catch (err){
+
+		res.json({success : false, msg : 'Falla en busqueda de vehiculo'})
+	}
+	
 
   });
+
+
+router.post('/registrar-c', (req, res, next) => {
+	try{
+	Cita.create({
+
+	fecha : req.body.fecha,
+	hora : req.body.hora,
+	idVehiculo : req.body.idVehiculo,
+	idUsuario : req.body.idUsuario,
+	
+	
+	}).then(json => {
+
+		res.json({success : true, msg : 'Cita solicitada'})
+	});
+
+
+}
+
+catch(err){
+
+	res.json({success : false, msg : 'Falla en el registro'})
+}
+
+
+
+
+});
 
 
 

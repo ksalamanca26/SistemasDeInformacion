@@ -31,7 +31,7 @@ user : any;
 
   loadUserData(){
 
-const data=localStorage.getItem('user');
+const data=JSON.parse(localStorage.getItem('user'));
 this.user=data;
 
   }
@@ -60,8 +60,24 @@ this.user=data;
   }
 
 
-  buscarVehiculos(idUsuario){
-   this.http.get('http://localhost:3000/buscar-v',idUsuario);
+  buscarVehiculos(user){
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    console.log(user);
+    return this.http.post('http://localhost:3000/buscar-v',user, {headers : headers})
+    .map(res => res.json());
+
+  }
+
+
+  registerCita(cita){
+
+
+   let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/registrar-c',cita, {headers : headers})
+    .map(res => res.json());
+
 
   }
 
