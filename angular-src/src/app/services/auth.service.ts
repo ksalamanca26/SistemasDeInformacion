@@ -81,6 +81,46 @@ this.user=data;
 
   }
 
+  deleteVehiculo(vehiculo){
+
+  let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/eliminar-v',vehiculo, {headers : headers})
+    .map(res => res.json());
+  }
+
+todosUsuarios(){
+
+  return this.http.get('http://localhost:3000/todos-usuarios')
+  .map(res => res.json());
+}
+
+
+  updateRol(user){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/update-r',user,{headers : headers})
+    .map(res => res.json());
+  }
+
+
+  buscarCitas(user){
+    console.log(user);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/buscar-c',user, {headers : headers})
+    .map(res => res.json());
+  }
+
+  deleteCita(cita){
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/eliminar-c',cita, {headers : headers})
+    .map(res => res.json());
+
+  }
+
 
 
 }

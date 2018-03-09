@@ -1,50 +1,60 @@
-
 <div class="container">
-    <h1>Cancelar Cita</h1>
+  <div class="row">
+    <h1> Cancelar Cita</h1>
+    <form (submit)="onDeleteSubmit()" class="col s12">
+     
+      <select [(ngModel)]= "selectedCita" name = "selectedCita" class="browser-default">
+      <label>Seleccione la cita</label>  
+      <option value="" disabled selected>Seleccione la cita</option>
+       <option *ngFor="let cita of citas" [ngValue]="cita">{{ cita.fecha }} {{cita.hora}} </option>
+    </select>
+
+    <div *ngIf="selectedCita">
+
+  <ul class="collection">
+    <li class="collection-item avatar">
+      <img src="images/yuna.jpg" alt="" class="circle">
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
+      
+    <button type="submit" class="btn btn-primary">Cancelar</button>
+
+    </div>
     
-        <ul class="collection ">
-            <li class="collection-item avatar">
-                <i class="material-icons circle">directions_car</i>
-              <span class="title highlight">Alejandro Medina</span>
-              <p>Lancer <br>
-                 22/01/2018
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle">directions_car</i>
-              <span class="title">Andres Medina</span>
-              <p>Fiesta <br>
-                05/06/2018
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle green">directions_car</i>
-              <span class="title">Kevin Salamanca</span>
-              <p>Tesla S <br>
-                 07/08/2018
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle red">directions_car</i>
-              <span class="title">Ramon Brito</span>
-              <p>Mazda 3<br>
-                 01/02/2018
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-          </ul>
-      
-      <h1> </h1>
-      
-      <h1> </h1>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Eliminar
-        <i class="material-icons right">send</i>
-      </button>
-      <h1> </h1>
-      </div>
+
+
+    </form>
+  </div>
+</div>
     
       <footer class="page-footer blue-grey darken-1">
           <div class="container">

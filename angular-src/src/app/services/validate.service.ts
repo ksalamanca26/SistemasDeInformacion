@@ -41,7 +41,14 @@ validateLogin(user){
 validateRegisterV(vehiculo){
 
 
+if(vehiculo.serial== undefined || vehiculo.modelo == undefined || vehiculo.fecha == undefined || vehiculo.placa == undefined || vehiculo.year == undefined)
+{
+	return false;
+}
 
+else{
+	return true;
+}
 
 
 }
@@ -59,6 +66,45 @@ else{
 
 	return true;
 }
+
+
+}
+
+validateDeleteV(idVehiculo){
+
+	if(idVehiculo == undefined){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
+
+validateUpdateR(usuario){
+
+
+	if(usuario.idUsuario == undefined || usuario.rol == undefined){
+		return false;
+	}
+
+	else{
+		return true;
+	}
+
+}
+
+
+validateDeleteC(cita){
+
+	if(cita==undefined){
+		return false;
+	}
+
+
+	else{
+		return true;
+	}
 
 
 }

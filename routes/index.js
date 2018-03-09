@@ -237,5 +237,135 @@ catch(err){
 });
 
 
+router.post('/eliminar-v', (req, res, next) => {
+
+try{
+
+Vehiculo.destroy({
+
+	where : {
+		idVehiculo : req.body.idVehiculo
+	}
+
+}).then(json =>{
+
+	res.json({success : true, msg : "Vehiculo eliminado"})
+})
+
+
+}
+
+catch(err){
+	res.json({success : false, msg: "Falla en la eliminacion"})
+}
+
+	 });
+
+router.get('/todos-usuarios', (req, res, next) =>{
+
+	try{
+
+		Usuario.findAll().then(json =>{
+
+			if(json!=undefined){
+				res.send(json)
+			}
+
+			else{
+				res.json({success : false, msg : "Esta undefined"})
+			}
+
+		})
+
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"})
+	}
+
+});
+
+
+router.post('/update-r', (req, res, next) =>{
+
+	try{
+		Usuario.update(
+			{rol : req.body.rol},
+			{where : {
+				idUsuario : req.body.idUsuario
+			}}
+			).then(json =>{
+
+				res.json({success : true, msg : "Usuario actualizado"})
+
+			})
+	}
+
+	catch(err){
+
+
+		res.json({success : false, msg : "Error en el query"})
+	}
+
+
+});
+
+router.post('/buscar-c', (req, res, next) =>{
+
+
+	try{
+
+		Cita.findAll({
+			where : {
+				idUsuario : req.body.id
+			}
+		}).then(json =>{
+			if(json!=undefined){
+			res.send(json)	
+			}
+
+			else{
+				res.json({success : false, msg : "Esta undefined"})
+			}
+			
+
+		})
+
+	}
+
+
+	catch(err){
+
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+
+});
+
+router.post('/eliminar-c', (req, res, next) =>{
+
+
+try{
+
+Cita.destroy({
+	where : {
+		idCita : req.body.idCita
+	}
+}).then(json =>{
+
+	res.json({success : true, msg : "Cita cancelada"});
+})
+
+}
+
+catch(err){
+
+	res.json({success : false, msg : "Error en el query"});
+
+}
+
+});
+
+
 
 module.exports= router;

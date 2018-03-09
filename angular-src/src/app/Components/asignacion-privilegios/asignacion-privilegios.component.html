@@ -1,17 +1,24 @@
 <div class="container">
-<h1>Asginar Privilegios</h1>
-<label>Seleccione el Usuario</label>
-  <select class="browser-default">
-    <option value="" disabled selected>Choose your option</option>
-    <option value="1">Usuario 1</option>
-    <option value="2">Usuario 2</option>
-    <option value="3">Usuario 3</option>
-    <option value="4">Usuario 4</option>
+  <div class="row">
+    <h1>Asginar Privilegios</h1>
+    <form (submit)="onUpdateSubmit()" class="col s12">
+  <label>Seleccione el Usuario</label>
+  <select [(ngModel)]= "idUsuario" name = "idUsuario"class="browser-default">
+    <option value="" disabled selected>Usuarios</option>
+    <option *ngFor ="let usuario of usuarios" [ngValue]="usuario.idUsuario"> {{usuario.email}}  </option>
   </select>
-  
-  <h2><button type="submit" class="btn btn-primary">Cliente</button>
-  <button type="submit" class="btn btn-primary">Gerente</button>
- <button type="submit" class="btn btn-primary">Mecánico</button></h2>
+    <label>Seleccione el rol</label>
+    <select [(ngModel)]= "rol" name = "rol" class="browser-default">
+    <option value="" disabled selected>Seleccione el rol</option>
+    <option value="1">Cliente</option>
+    <option value="2">Mecanico</option>
+    <option value="3">Gerente</option>
+    <option value="4">Administrador</option>
+  </select>
+
+  <button type="submit" class="btn btn-primary" value="Submit">Actualizar usuario</button>
+</form>
+ </div>
 </div> 
 
 <footer class="page-footer blue-grey darken-1">
