@@ -24,12 +24,14 @@ import { SideNavComponent } from './Components/side-nav/side-nav.component';
 import { AboutComponent } from './Components/about/about.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { EliminarVehiculoComponent } from './Components/eliminar-vehiculo/eliminar-vehiculo.component';
+import { ModificarVehiculoComponent } from './Components/modificar-vehiculo/modificar-vehiculo.component';
 import { CancelarCitaComponent } from './Components/cancelar-cita/cancelar-cita.component';
 import { RegistrarAdmComponent } from './Components/registrar-adm/registrar-adm.component';
 
 import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {AuthService} from './services/auth.service';
+
 
 
 
@@ -50,6 +52,7 @@ const appRoutes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'eliminar-vehiculo', component: EliminarVehiculoComponent },
+  { path: 'modificar-vehiculo', component : ModificarVehiculoComponent},
   { path: 'cancelar-cita', component: CancelarCitaComponent },
   { path: 'registrar-adm', component: RegistrarAdmComponent },
 ];
@@ -75,6 +78,7 @@ const appRoutes: Routes = [
     EliminarVehiculoComponent,
     CancelarCitaComponent,
     RegistrarAdmComponent,
+    ModificarVehiculoComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,

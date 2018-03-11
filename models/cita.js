@@ -12,15 +12,25 @@ return sequelize.define('cita', {
 
 	},
 
-	fecha : {
+	fechaSolicitud : {
 
 		type : DataTypes.DATE,
 		allowNull : false
 
 	},
 
-	hora : {
+	fechaAsignada : {
+		type : DataTypes.DATE,
+		allowNull : true
+	},
 
+	Hora : {
+
+		type : DataTypes.STRING,
+		allowNull : false
+	},
+
+	Estado : {
 		type : DataTypes.STRING,
 		allowNull : false
 	},

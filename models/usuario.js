@@ -12,34 +12,34 @@ return sequelize.define('usuario', {
 
 	},
 
-	nombre : {
+	Nombre : {
 
 		type : DataTypes.STRING,
 		allowNull : false
 
 	},
 
-	apellido : {
+	Apellido : {
 
 		type : DataTypes.STRING,
 		allowNull : false
 	},
 
 
-	email : {
+	Email : {
 
 		type : DataTypes.STRING,
 		unique : true,
 		allowNull : false
 	},
 
-	contraseña : {
+	Contraseña : {
 
 		type : DataTypes.STRING,
 		allowNull : false
 	},
 
-	rol : {
+	Rol : {
 
 		type : DataTypes.INTEGER,
 		allowNull : false

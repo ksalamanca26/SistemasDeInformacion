@@ -106,7 +106,16 @@ validateDeleteC(cita){
 		return true;
 	}
 
+}
 
+
+validateDetallesCita(selectedCita){
+	if(selectedCita==undefined){
+		return false;
+	}
+	else{
+		return true;
+	}
 }
 
 }

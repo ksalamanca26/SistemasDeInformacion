@@ -3,19 +3,12 @@
     <h1> Solicitar Cita</h1>
     <form (submit)="onRegisterSubmit()" class="col s12">
       <div class="row">
-        <div class="input-field col s6">
-          <input id="date" type="date" [(ngModel)]= "fecha" name = "fecha" class="validate">
-          <label for="date">Fecha de la Cita</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="hora" type="text" [(ngModel)]= "hora" name = "hora" class="validate">
-          <label for="hora">Hora</label>
-        </div>
       </div>
       <select [(ngModel)]= "idVehiculo" name = "idVehiculo" class="browser-default">
       <option value="" disabled selected>Seleccione el vehículo</option>
        <option *ngFor="let vehiculo of vehiculos" [ngValue]="vehiculo.idVehiculo">{{ vehiculo.Modelo }}</option>
     </select>
+     <h1></h1>
     <button type="submit" class="btn btn-primary">Solicitar</button>
     </form>
   </div>

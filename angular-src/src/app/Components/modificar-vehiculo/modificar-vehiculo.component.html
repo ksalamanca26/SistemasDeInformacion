@@ -1,0 +1,74 @@
+<div class="container">
+<div class="row">
+  <h1> Modificar Vehículo</h1>
+
+  <select [(ngModel)]= "selectedVehiculo" name = "selectedVehiculo" class="browser-default">
+      <option value="" disabled selected>Seleccione el vehículo</option>
+       <option *ngFor="let vehiculo of vehiculos" [ngValue]="vehiculo">{{ vehiculo.Modelo }} {{vehiculo.Year}} </option>
+    </select>
+  <h1> </h1>
+    <div *ngIf="selectedVehiculo">
+
+    	<div *ngIf="selectedVehiculo.Estado=='Activo'">
+     	<button (click)="onActivarDesactivar()" class="btn btn-primary">Desactivar</button>
+     </div>
+     <div *ngIf="selectedVehiculo.Estado=='Desactivado'">
+     	<button (click)="onActivarDesactivar()" class="btn btn-primary">Activar</button>
+     </div>
+         <br>
+    	<form (submit) = "onSubmit()" class="col s12">
+      <div class="row">
+        <div class="col s6">
+       	<label for="serial">Serial del Motor</label>
+          <input id="serial" type="text" [(ngModel)]= "selectedVehiculo.Serial" name = "serial" placeholder = "serial"  class="validate">
+          
+        </div>
+        <div class="col s6">
+        	<label for="modelo">Modelo</label>
+          <input id="modelo" type="text" [(ngModel)]= "selectedVehiculo.Modelo" name = "modelo" placeholder="modelo" class="validate">
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+        	<label for="year">Año</label>
+          <input id="year" type="text" [(ngModel)]= "selectedVehiculo.Year" name = "year" placeholder="year" class="validate">
+          
+        </div>
+        <div class="col s6">
+        	<label for="placa">Placa</label>
+          <input id="placa" type="text" [(ngModel)]= "selectedVehiculo.Placa" name = "placa" placeholder="placa" class="validate">
+          
+        </div>
+      </div>
+      
+       <button type="submit" class="btn btn-primary">Modificar</button>
+    </form>
+</div>
+
+    
+  </div>
+</div>
+
+<footer class="page-footer blue-grey darken-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Mecamet C.A</h5>
+          <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          
+          <ul>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2018 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!"></a>
+      </div>
+    </div>
+  </footer>

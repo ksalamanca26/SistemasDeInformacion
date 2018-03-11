@@ -34,11 +34,11 @@ console.log(password);
 	try{
 	Usuario.create({
 
-	nombre : req.body.nombre,
-	apellido : req.body.apellido,
-	email : req.body.email,
-	contraseña : hash,
-	rol : req.body.rol
+	Nombre : req.body.nombre,
+	Apellido : req.body.apellido,
+	Email : req.body.email,
+	Contraseña : hash,
+	Rol : req.body.rol
 	
 	
 	}).then(json => {
@@ -73,7 +73,7 @@ Usuario.findOne({
 
 	where : {
 
-		email : req.body.email
+		Email : req.body.email
 	}
 
 }).then(usuario =>{
@@ -82,17 +82,17 @@ if(usuario!=undefined){
 	console.log(req.body.password);
 	console.log(usuario.dataValues.contraseña);
 
-bcrypt.compare(req.body.password, usuario.dataValues.contraseña).then(function(val){
+bcrypt.compare(req.body.password, usuario.dataValues.Contraseña).then(function(val){
 
 
 	if(val){
 		res.json({success : true, 
 			user : {
 				id : usuario.dataValues.idUsuario,
-				nombre : usuario.dataValues.nombre,
-				apellido : usuario.dataValues.apellido,
-				email : usuario.dataValues.email,
-				rol : usuario.dataValues.rol
+				nombre : usuario.dataValues.Nombre,
+				apellido : usuario.dataValues.Apellido,
+				email : usuario.dataValues.Email,
+				rol : usuario.dataValues.Rol
 			}});
 	}
 	else{
@@ -155,7 +155,7 @@ try{
 	Serial : req.body.serial,
 	fechaRegistro : req.body.fecha,
 	Placa : req.body.placa,
-	Año : req.body.year,
+	Year : req.body.year,
 	Modelo : req.body.modelo,
 	idUsuario : req.body.idUsuario
 	
@@ -176,7 +176,7 @@ catch(err){
 });
 
 
-router.post('/buscar-v', (req, res, next) =>{
+router.post('/buscar-vehiculos', (req, res, next) =>{
 
 	try{
 	Vehiculo.findAll({
@@ -211,9 +211,9 @@ router.post('/buscar-v', (req, res, next) =>{
 router.post('/registrar-c', (req, res, next) => {
 	try{
 	Cita.create({
-
-	fecha : req.body.fecha,
-	hora : req.body.hora,
+	Hora : req.body.hora,
+	fechaSolicitud : req.body.fecha,
+	Estado : "Solicitada",
 	idVehiculo : req.body.idVehiculo,
 	idUsuario : req.body.idUsuario,
 	
@@ -290,7 +290,7 @@ router.post('/update-r', (req, res, next) =>{
 
 	try{
 		Usuario.update(
-			{rol : req.body.rol},
+			{Rol : req.body.rol},
 			{where : {
 				idUsuario : req.body.idUsuario
 			}}
@@ -365,6 +365,127 @@ catch(err){
 }
 
 });
+
+
+router.get('/todas-citas', (req, res, next) =>{
+
+try{
+
+	Cita.findAll({
+		where : {
+			Estado : "Solicitada"
+		}
+	}).then(json =>{
+
+		res.send(json);
+	})
+
+}
+
+
+catch(err){
+
+	res.json({success : false, msg : "Error en el query"});
+
+}
+
+
+});
+
+
+router.post('/buscar-u', (req, res, next) =>{
+
+
+	try{
+
+		Usuario.findOne({
+			where : {
+				idUsuario : req.body.idUsuario
+			}
+		}).then(json =>{
+			res.send(json);
+		})
+
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+		 }
+	
+
+});
+
+
+router.post('/buscar-v', (req, res, next) =>{
+	try{
+		Vehiculo.findOne({
+			where : {
+				idVehiculo : req.body.idVehiculo
+			}
+		}).then(json=>{
+			res.send(json);
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+});
+
+
+router.post('/update-c', (req, res, next) =>{
+
+	try{
+	Cita.update({
+		fechaAsignada : req.body.fecha,
+		Hora : req.body.hora,
+		Estado : "Asignada"},
+
+		{where : {
+			idCita : req.body.idCita
+		}
+	}).then(json=>{
+		res.json({success :true, msg : "Fecha asignada"});
+	})	
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+	
+
+});
+
+
+
+router.post('/update-v',(req, res, next) =>{
+
+
+	try{
+
+		Vehiculo.update({
+			Serial : req.body.serial,
+			Placa : req.body.placa,
+			Modelo : req.body.modelo,
+			Year : req.body.year,
+			Estado : req.body.estado
+		},
+		{where :{
+			idVehiculo : req.body.idVehiculo
+		}}).then(json=>{
+			res.json({success : true, msg : "Vehiculo modificado"});
+		})
+
+	}
+
+
+	catch(err){
+
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+
+})
 
 
 

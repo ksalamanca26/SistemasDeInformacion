@@ -33,7 +33,7 @@ return sequelize.define('vehiculo', {
 		allowNull : false
 	},
 
-	Año : {
+	Year : {
 
 		type : DataTypes.STRING,
 		allowNull : false
@@ -45,6 +45,11 @@ return sequelize.define('vehiculo', {
 		allowNull : false
 	},
 
+	Estado : {
+		type : DataTypes.STRING,
+		allowNull : false
+	},
+	
 	idUsuario : {
 
 		type : DataTypes.INTEGER,

@@ -64,7 +64,7 @@ this.user=data;
    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     console.log(user);
-    return this.http.post('http://localhost:3000/buscar-v',user, {headers : headers})
+    return this.http.post('http://localhost:3000/buscar-vehiculos',user, {headers : headers})
     .map(res => res.json());
 
   }
@@ -121,6 +121,41 @@ todosUsuarios(){
 
   }
 
+  todasCitas(){
+    return this.http.get('http://localhost:3000/todas-citas')
+    .map(res => res.json());
+  }
+
+
+buscarUsuario(user){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/buscar-u', user, {headers : headers})
+    .map(res => res.json());
+  }
+
+
+  buscarVehiculo(vehiculo){
+   let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return this.http.post('http://localhost:3000/buscar-v', vehiculo, {headers : headers})
+   .map(res => res.json());
+  }
+
+  asignarFecha(cita){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return this.http.post('http://localhost:3000/update-c',cita,{headers : headers})
+   .map(res => res.json());
+  }
+
+
+  updateVehiculo(vehiculo){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return this.http.post('http://localhost:3000/update-v',vehiculo, {headers : headers})
+   .map(res => res.json());
+  }
 
 
 }
