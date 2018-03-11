@@ -13,6 +13,8 @@ export class CancelarCitaComponent implements OnInit {
 
 	citas : any[];
 	selectedCita : any;
+  cliente : any;
+  vehiculo : any;
 
   constructor(private validateService : ValidateService,
   	private authService : AuthService,
@@ -28,6 +30,35 @@ export class CancelarCitaComponent implements OnInit {
   			this.citas=data;
   		}
   	});
+  }
+
+
+  onSelect(){
+    if(!this.validateService.validateDetallesCita(this.selectedCita)){
+      this.flashMessage.show("Por favor seleccione una cita", {cssClass : 'alert-danger', timeout : 3000})
+      return false;
+    }
+
+    const user = {
+      idUsuario : this.selectedCita.idUsuario
+    }
+
+    this.authService.buscarUsuario(user).subscribe(data=>{
+      if(data){
+        this.cliente=data;
+      }
+    });
+
+
+    const carro = {
+      idVehiculo : this.selectedCita.idVehiculo
+    }
+
+    this.authService.buscarVehiculo(carro).subscribe(data=>{
+      if(data){
+        this.vehiculo=data;
+      }
+    })
   }
 
 

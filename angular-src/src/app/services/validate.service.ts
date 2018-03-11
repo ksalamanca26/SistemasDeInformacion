@@ -55,7 +55,7 @@ else{
 
 validateRegisterC(cita){
 
-if(cita.fecha == undefined || cita.hora == undefined || cita.idVehiculo == undefined || cita.idUsuario == undefined)
+if(cita.idVehiculo == undefined || cita.idUsuario == undefined)
 {
 
 return false;

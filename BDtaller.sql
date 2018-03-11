@@ -24,8 +24,7 @@ DROP TABLE IF EXISTS `cita`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cita` (
   `idCita` int(11) NOT NULL AUTO_INCREMENT,
-  `Hora` varchar(11) NOT NULL,
-  `fechaSolicitud` date NOT NULL,
+  `Hora` varchar(11) DEFAULT NULL,
   `fechaAsignada` date DEFAULT NULL,
   `Estado` varchar(45) NOT NULL,
   `idVehiculo` int(11) NOT NULL,
@@ -35,7 +34,7 @@ CREATE TABLE `cita` (
   KEY `idvehiculo_idx` (`idVehiculo`),
   CONSTRAINT `idusuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idvehiculo` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +43,6 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (2,'4:00 pm','2018-03-24','2018-03-24','Asignada',5,14),(3,'12:00 pm','2018-03-11',NULL,'Solicitada',7,14);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -176,7 +174,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `idUsuario_UNIQUE` (`idUsuario`),
   UNIQUE KEY `email_UNIQUE` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,7 +183,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'Kevin','Salamanca','k.salamanca@correo.unimet.edu.ve','prueba',4),(2,'Bob','El Constructor','bobconstruye@gmail.com','$2a$10$QJGuD10cPlhu1/BE69h69.WQ.Rt1fxpv/6XuR7IGNLczqwIkAIYr.',1),(3,'Ousmane','Dembelé','dembele11@gmail.com','$2a$10$Jvd6OzMezB4DM2aBxW.DUeT9K2BRW0EKSp.7gi9NuNkpMmhccw8LK',1),(4,'Rafael','Matienzo','mainframe@ibm.com','$2a$10$K5G.QchVlBLBsEE5s3cRceMxUAkbC5mYx8F69y.Dhep0Xpg2/t6IW',1),(7,'Lewis','Hamilton','lhamilton@yahoo.com','$2a$10$rdvLIgrhxnJKGZWCr5ll7ufS4HYNzumuqSvqvrsynXiEg56w056yK',1),(11,'Luis','Suárez','lsuarez9@gmail.com','$2a$10$ZAkDpycKptHBsBpJJstYp.vAvZVy01HeXqHPZnoBDEPv0DLa8atWO',1),(12,'Phillipe','Coutinho','pcoutinho@gmail.com','$2a$10$XOwkR9lZ9Nbtpn5rOb7L6eXN/hWjRM/QS96vSmFkc1gBCK8ZcpTEK',4),(13,'Toño','El Amable','tamable@gmail.com','$2a$10$dZANy3BVR96HLDw03vFFwuLIXGDuZTrOuTm8qwSUHiLZuSDWVPvDy',2),(14,'Soyun','Cliente','cliente@gmail.com','$2a$10$hylGYzPP2m73ygvWXmImYuLStLxPZS/RgKOvE3qfMZsVZ/KPtWVuW',1);
+INSERT INTO `usuario` VALUES (1,'Kevin','Salamanca','k.salamanca@correo.unimet.edu.ve','prueba',2),(2,'Bob','El Constructor','bobconstruye@gmail.com','$2a$10$QJGuD10cPlhu1/BE69h69.WQ.Rt1fxpv/6XuR7IGNLczqwIkAIYr.',1),(3,'Ousmane','Dembelé','dembele11@gmail.com','$2a$10$Jvd6OzMezB4DM2aBxW.DUeT9K2BRW0EKSp.7gi9NuNkpMmhccw8LK',1),(4,'Rafael','Matienzo','mainframe@ibm.com','$2a$10$K5G.QchVlBLBsEE5s3cRceMxUAkbC5mYx8F69y.Dhep0Xpg2/t6IW',1),(7,'Lewis','Hamilton','lhamilton@yahoo.com','$2a$10$rdvLIgrhxnJKGZWCr5ll7ufS4HYNzumuqSvqvrsynXiEg56w056yK',1),(11,'Luis','Suárez','lsuarez9@gmail.com','$2a$10$ZAkDpycKptHBsBpJJstYp.vAvZVy01HeXqHPZnoBDEPv0DLa8atWO',1),(12,'Phillipe','Coutinho','pcoutinho@gmail.com','$2a$10$XOwkR9lZ9Nbtpn5rOb7L6eXN/hWjRM/QS96vSmFkc1gBCK8ZcpTEK',4),(13,'Toño','El Amable','tamable@gmail.com','$2a$10$dZANy3BVR96HLDw03vFFwuLIXGDuZTrOuTm8qwSUHiLZuSDWVPvDy',2),(14,'Soyun','Cliente','cliente@gmail.com','$2a$10$hylGYzPP2m73ygvWXmImYuLStLxPZS/RgKOvE3qfMZsVZ/KPtWVuW',1),(16,'YoSoy','Mecánico','mecanico@gmail.com','$2a$10$YwjcQh6S7B3FU/zgWMYaL.g64aax.GcKD6as4DMJqeajsbudafwhK',2),(22,'Señor','Gerente','gerente@gmail.com','$2a$10$nD0a66MmNjum0L1RBCqDyumVWH85Aa9/UR/Bpb7AgO1Q1eUYgNt1m',3);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +235,7 @@ CREATE TABLE `vehiculo` (
   UNIQUE KEY `Placa_UNIQUE` (`Placa`),
   KEY `usuario_tiene_vehiculo_idx` (`idUsuario`),
   CONSTRAINT `usuario_tiene_vehiculo` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,7 +244,7 @@ CREATE TABLE `vehiculo` (
 
 LOCK TABLES `vehiculo` WRITE;
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` VALUES (5,'ET6736F2661','2018-02-22','L4A-O32','Lamborghini Aventador LP700-4',2012,'Desactivado',14),(6,'EMN6300R5U0273','2018-03-09','J21-KL2','Tesla Model 3',2018,'Activo',12),(7,'ETK945WISM41WR','2018-03-10','NN4-IL1','Toyota Corolla',2006,'Activo',14);
+INSERT INTO `vehiculo` VALUES (5,'ET6736F2661','2018-02-22','L4A-O32','Lamborghini Aventador LP700-4',2012,'Desactivado',14),(6,'EMN6300R5U0273','2018-03-09','J21-KL2','Tesla Model 3',2018,'Activo',12),(7,'ETK945WISM41WR','2018-03-10','NN4-IL1','Toyota Corolla',2006,'Activo',14),(9,'EMNKR420R5U0273','2018-03-11','MAP-90Q','Mazda 7',2009,'Activo',16);
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,4 +283,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-11 10:46:49
+-- Dump completed on 2018-03-11 13:08:34

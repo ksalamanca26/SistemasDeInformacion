@@ -80,7 +80,7 @@ Usuario.findOne({
 
 if(usuario!=undefined){
 	console.log(req.body.password);
-	console.log(usuario.dataValues.contraseña);
+	console.log(usuario.dataValues.Contraseña);
 
 bcrypt.compare(req.body.password, usuario.dataValues.Contraseña).then(function(val){
 
@@ -157,6 +157,7 @@ try{
 	Placa : req.body.placa,
 	Year : req.body.year,
 	Modelo : req.body.modelo,
+	Estado : "Activo",
 	idUsuario : req.body.idUsuario
 	
 	

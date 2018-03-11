@@ -13,8 +13,6 @@ export class SolicitarCitaComponent implements OnInit {
 	vehiculos : any[];
 	idVehiculo : number;
 
-	fecha : Date;
-	hora : String;
 
   constructor(private authService : AuthService,
   	private validateService : ValidateService,
@@ -38,9 +36,6 @@ export class SolicitarCitaComponent implements OnInit {
   onRegisterSubmit(){
 
   	const cita = {
-
-  	fecha : this.fecha,
-  	hora : this.hora,
   	idVehiculo : this.idVehiculo,
   	idUsuario : this.authService.user.id
   }

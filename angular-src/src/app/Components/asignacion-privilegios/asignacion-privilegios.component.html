@@ -5,7 +5,7 @@
   <label>Seleccione el Usuario</label>
   <select [(ngModel)]= "idUsuario" name = "idUsuario"class="browser-default">
     <option value="" disabled selected>Usuarios</option>
-    <option *ngFor ="let usuario of usuarios" [ngValue]="usuario.idUsuario"> {{usuario.email}}  </option>
+    <option *ngFor ="let usuario of usuarios" [ngValue]="usuario.idUsuario"> {{usuario.Email}}  </option>
   </select>
     <label>Seleccione el rol</label>
     <select [(ngModel)]= "rol" name = "rol" class="browser-default">

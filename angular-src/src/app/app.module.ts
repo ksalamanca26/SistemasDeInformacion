@@ -31,6 +31,8 @@ import { RegistrarAdmComponent } from './Components/registrar-adm/registrar-adm.
 import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {AuthService} from './services/auth.service';
+import { DashboardMecanicoComponent } from './Components/dashboard-mecanico/dashboard-mecanico.component';
+import { DashboardGerenteComponent } from './Components/dashboard-gerente/dashboard-gerente.component';
 
 
 
@@ -79,6 +81,8 @@ const appRoutes: Routes = [
     CancelarCitaComponent,
     RegistrarAdmComponent,
     ModificarVehiculoComponent,
+    DashboardMecanicoComponent,
+    DashboardGerenteComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,
