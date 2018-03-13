@@ -47,6 +47,14 @@ export class IniciarSesionComponent implements OnInit {
         if(data.user.rol ==1){
           this.router.navigate(['/dashboard']);
         }
+
+        else if(data.user.rol==2){
+          this.router.navigate(['/dashboard-mecanico']);
+        }
+
+        else if(data.user.rol==3){
+          this.router.navigate(['/dashboard-gerente']);
+        }
         else{
           this.router.navigate(['/dashboard-usuario']);
         }

@@ -158,4 +158,12 @@ buscarUsuario(user){
   }
 
 
+  updateUsuario(user){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:3000/update-u',user,{headers :headers})
+   .map(res => res.json());
+  }
+
+
 }

@@ -23,16 +23,18 @@ import { DashboardUsuarioComponent } from './Components/dashboard-usuario/dashbo
 import { SideNavComponent } from './Components/side-nav/side-nav.component';
 import { AboutComponent } from './Components/about/about.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { DashboardMecanicoComponent } from './Components/dashboard-mecanico/dashboard-mecanico.component';
+import { DashboardGerenteComponent } from './Components/dashboard-gerente/dashboard-gerente.component';
 import { EliminarVehiculoComponent } from './Components/eliminar-vehiculo/eliminar-vehiculo.component';
 import { ModificarVehiculoComponent } from './Components/modificar-vehiculo/modificar-vehiculo.component';
 import { CancelarCitaComponent } from './Components/cancelar-cita/cancelar-cita.component';
 import { RegistrarAdmComponent } from './Components/registrar-adm/registrar-adm.component';
-
+import { ModificarUsuarioComponent } from './Components/modificar-usuario/modificar-usuario.component';
 import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {AuthService} from './services/auth.service';
-import { DashboardMecanicoComponent } from './Components/dashboard-mecanico/dashboard-mecanico.component';
-import { DashboardGerenteComponent } from './Components/dashboard-gerente/dashboard-gerente.component';
+
+
 
 
 
@@ -50,6 +52,8 @@ const appRoutes: Routes = [
   { path: 'repuestos', component: RespuestosComponent },
   { path: 'iniciar-sesion', component: IniciarSesionComponent },
   { path: 'dashboard-usuario', component: DashboardUsuarioComponent },
+  { path: 'dashboard-mecanico', component: DashboardMecanicoComponent },
+  { path: 'dashboard-gerente', component: DashboardGerenteComponent },
   { path: 'side-nav', component: SideNavComponent },
   { path: 'about', component: AboutComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -57,6 +61,7 @@ const appRoutes: Routes = [
   { path: 'modificar-vehiculo', component : ModificarVehiculoComponent},
   { path: 'cancelar-cita', component: CancelarCitaComponent },
   { path: 'registrar-adm', component: RegistrarAdmComponent },
+  { path: 'modificar-usuario', component: ModificarUsuarioComponent },
 ];
 
 @NgModule({
@@ -83,6 +88,7 @@ const appRoutes: Routes = [
     ModificarVehiculoComponent,
     DashboardMecanicoComponent,
     DashboardGerenteComponent,
+    ModificarUsuarioComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,

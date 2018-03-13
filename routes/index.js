@@ -486,7 +486,28 @@ router.post('/update-v',(req, res, next) =>{
 	}
 
 
-})
+});
+
+router.post('/update-u', (req, res, next) =>{
+
+	try{
+	Usuario.update({
+		Nombre : req.body.nombre,
+		Apellido : req.body.apellido,
+		Email : req.body.email
+	},
+	{where : {
+		idUsuario : req.body.idUsuario
+	}}).then(json=>{
+		res.json({success : true, msg : "Usuario modificado"});
+	})	
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+	
+});
 
 
 

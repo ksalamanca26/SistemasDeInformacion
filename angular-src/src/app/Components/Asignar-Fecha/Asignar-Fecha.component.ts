@@ -81,12 +81,12 @@ export class AsignarFechaComponent implements OnInit {
   	this.authService.asignarFecha(cita).subscribe(data=>{
   		if(data.success){
   			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000});
-  			this.router.navigate(['dashboard-usuario']);
+  			this.router.navigate(['dashboard-gerente']);
   		}
 
   		else{
   			this.flashMessage.show("Algo salió mal", {cssClass : 'alert-danger', timeout : 3000});
-  			this.router.navigate(['dashboard-usuario']);
+  			this.router.navigate(['dashboard-gerente']);
   		}
   	})
 

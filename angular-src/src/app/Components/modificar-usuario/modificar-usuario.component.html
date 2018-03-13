@@ -1,0 +1,62 @@
+<div class="container">
+<div class="row">
+  <h1> Modificar Usuario</h1>
+
+  <select [(ngModel)]= "selectedUsuario" name = "selectedUsuario" class="browser-default">
+      <option value="" disabled selected>Seleccione el usuario</option>
+       <option *ngFor="let usuario of usuarios" [ngValue]="usuario">{{ usuario.Email }}</option>
+    </select>
+  <h1> </h1>
+    <div *ngIf="selectedUsuario">
+         <br>
+    	<form (submit) = "onSubmit()" class="col s12">
+      <div class="row">
+        <div class="col s6">
+       	<label for="nombre">Nombre</label>
+          <input id="nombre" type="text" [(ngModel)]= "selectedUsuario.Nombre" name = "nombre" placeholder = "nombre"  class="validate">
+          
+        </div>
+        <div class="col s6">
+        	<label for="apellido">Apellido</label>
+          <input id="apellido" type="text" [(ngModel)]= "selectedUsuario.Apellido" name = "apellido" placeholder="apellido" class="validate">
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+        	<label for="email">Email</label>
+          <input id="email" type="text" [(ngModel)]= "selectedUsuario.Email" name = "email" placeholder="email" class="validate">
+          
+        </div>
+      </div>
+      
+       <button type="submit" class="btn btn-primary">Modificar</button>
+    </form>
+</div>
+
+    
+  </div>
+</div>
+
+<footer class="page-footer black">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Mecamet C.A</h5>
+          <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          
+          <ul>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2018 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!"></a>
+      </div>
+    </div>
+  </footer>
