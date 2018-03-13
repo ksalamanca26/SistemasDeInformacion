@@ -45,6 +45,11 @@ export class ModificarUsuarioComponent implements OnInit {
   		return false;
   	}
 
+    if(!this.validateService.validateEmail(user.email)){
+      this.flashMessage.show("Por favor ingrese un email válido", {cssClass : 'alert-danger', timeout : 3000});
+      return false;
+    }
+
   	this.authService.updateUsuario(user).subscribe(data=>{
   		if(data.success){
   			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000});
