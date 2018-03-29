@@ -20,6 +20,15 @@ else{
 }
 }
 
+validateUpdateU(user){
+	if(user.nombre == '' || user.apellido == '' || user.email == ''){
+		return false;
+	}
+	else{
+		return true;
+	}
+}
+
 validateEmail(email){
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -51,6 +60,16 @@ else{
 }
 
 
+}
+
+validateUpdateV(vehiculo){
+	if(vehiculo.serial == '' || vehiculo.modelo == '' ||  vehiculo.placa == '' || vehiculo.year == ''){
+		return false;
+	}
+
+	else{
+		return true;
+	}
 }
 
 validateRegisterC(cita){
@@ -113,6 +132,27 @@ validateDetallesCita(selectedCita){
 	if(selectedCita==undefined){
 		return false;
 	}
+	else{
+		return true;
+	}
+}
+
+
+validateDetallesRepuesto(repuesto){
+	if(repuesto.Nombre == undefined || repuesto.Serial == undefined || repuesto.Cantidad == undefined || repuesto.Tipo == undefined){
+		return false;
+	}
+
+	else{
+		return true;
+	}
+}
+
+validateUpdateRepuesto(repuesto){
+	if(repuesto.Nombre == '' || repuesto.Serial == '' || repuesto.Cantidad == '' || repuesto.Tipo == ''){
+		return false;
+	}
+
 	else{
 		return true;
 	}

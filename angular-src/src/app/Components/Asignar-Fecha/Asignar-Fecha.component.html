@@ -1,90 +1,67 @@
-
 <div class="container">
-<h1>Asignacion de Fecha</h1>
-<label>Seleccione la Cita</label>
-  <select [(ngModel)]= "selectedCita" name = "selectedCita" class="browser-default">
-    <option value="" disabled selected>Choose your option</option>
-    <option *ngFor="let cita of citas" [ngValue]="cita">Cita</option>
-  </select>
+<div class="row">
+  <h1> Asignar Fecha</h1>
 
-  <button class="btn waves-effect waves-light" (click)="onSelect()">Ver Detalles
-  </button>
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnas">{{col}}</th>
+          </tr>
+        </thead>
 
-    <div *ngIf="cliente && vehiculo">
-      
-<ul class="collection">
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">account_box</i>
-      <span class="title">Cliente</span>
-      <p> Nombre: {{cliente.Nombre}} <br>
-         Apellido: {{cliente.Apellido}}
-      </p>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">directions_car</i>
-      <span class="title">Vehículo</span>
-      <p>Modelo: {{vehiculo.Modelo}}
-         
-      </p>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">event_note</i>
-      <span class="title">Estado de la cita</span>
-      <p> 
-         {{selectedCita.Estado}}
-      </p>
-    </li>
-  </ul>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td *ngFor="let col of columnas" >{{cita[col]}}</td>
+            Asignar Fecha <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(cita)"><i class="material-icons">today</i></a>
+          </tr>
+        </tbody>
+      </table>
+  <h1> </h1>
+    <div *ngIf="selectedCita">
 
-    </div>
     
-  
-  <h1> </h1>
-  <form (submit) = "onSubmit()"> 
-    <label for="date">Fecha de la Cita</label>
-      <input id="date" type="date" [(ngModel)]= "fecha" name = "fecha" class="validate"> 
-      <div class="input-field col s6">
-          <input id="hora" type="text" [(ngModel)]= "hora" name = "hora" class="validate">
+         <br>
+      <form (submit)="onAsignarFecha()" class="col s12">
+      <div class="row">
+        <div class="col s6">
+        <label for="serial">Fecha de la Cita</label>
+          <input id="date" type="date" [(ngModel)]= "selectedCita.fechaAsignada" name = "fecha" class="validate">
+          
+        </div>
+        <div class="col s6">
           <label for="hora">Hora</label>
+          <input id="hora" type="text" [(ngModel)]= "selectedCita.Hora" name = "hora" class="validate">
+          
         </div>
-         
-  
-    <button class="btn waves-effect waves-light" type="submit">Asignar Fecha
-  </button>
-  </form>
-  <h1> </h1>
-  <h1> </h1>
+      </div>
+     <h1></h1>
+       <button type="submit" class="btn btn-primary">Asignar Fecha</button>
+    </form>
+</div>
+
+    
   </div>
+</div>
 
-  <footer class="page-footer black">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Mecamet C.A</h5>
-            <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
-          </div>
-          <div class="col l4 offset-l2 s12">
+<footer class="page-footer black">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Mecamet C.A</h5>
+          <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          
+          <ul>
             
-            <ul>
-              
-            </ul>
-          </div>
+          </ul>
         </div>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
-        © 2018 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!"></a>
-        </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2018 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!"></a>
       </div>
-    </footer>
-
-    <script>$('.datepicker').pickadate({
-        selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15, // Creates a dropdown of 15 years to control year,
-        today: 'Today',
-        clear: 'Clear',
-        close: 'Ok',
-        closeOnSelect: false // Close upon selecting a date,
-      });</script>
-        
+    </div>
+  </footer>

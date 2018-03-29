@@ -10,7 +10,7 @@ user : any;
   registerUser(user){
   	let headers = new Headers();
   	headers.append('Content-Type', 'application/json');
-  	return this.http.post('http://localhost:3000/register', user, {headers : headers})
+  	return this.http.post('http://localhost:8080/register', user, {headers : headers})
   	.map(res=> res.json());
 
   }
@@ -18,7 +18,7 @@ user : any;
   loginUser(user){
   	let headers = new Headers();
   	headers.append('Content-Type', 'application/json');
-  	return this.http.post('http://localhost:3000/authenticate', user, {headers : headers})
+  	return this.http.post('http://localhost:8080/authenticate', user, {headers : headers})
   	.map(res => res.json());
   }
 
@@ -54,7 +54,7 @@ this.user=data;
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/registrar-v',vehiculo, {headers : headers})
+    return this.http.post('http://localhost:8080/registrar-v',vehiculo, {headers : headers})
     .map(res => res.json());
 
   }
@@ -64,7 +64,7 @@ this.user=data;
    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     console.log(user);
-    return this.http.post('http://localhost:3000/buscar-vehiculos',user, {headers : headers})
+    return this.http.post('http://localhost:8080/buscar-vehiculos',user, {headers : headers})
     .map(res => res.json());
 
   }
@@ -75,7 +75,7 @@ this.user=data;
 
    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/registrar-c',cita, {headers : headers})
+    return this.http.post('http://localhost:8080/registrar-c',cita, {headers : headers})
     .map(res => res.json());
 
 
@@ -85,13 +85,13 @@ this.user=data;
 
   let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/eliminar-v',vehiculo, {headers : headers})
+    return this.http.post('http://localhost:8080/eliminar-v',vehiculo, {headers : headers})
     .map(res => res.json());
   }
 
 todosUsuarios(){
 
-  return this.http.get('http://localhost:3000/todos-usuarios')
+  return this.http.get('http://localhost:8080/todos-usuarios')
   .map(res => res.json());
 }
 
@@ -99,7 +99,7 @@ todosUsuarios(){
   updateRol(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/update-r',user,{headers : headers})
+    return this.http.post('http://localhost:8080/update-r',user,{headers : headers})
     .map(res => res.json());
   }
 
@@ -108,7 +108,7 @@ todosUsuarios(){
     console.log(user);
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/buscar-c',user, {headers : headers})
+    return this.http.post('http://localhost:8080/buscar-c',user, {headers : headers})
     .map(res => res.json());
   }
 
@@ -116,13 +116,13 @@ todosUsuarios(){
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/eliminar-c',cita, {headers : headers})
+    return this.http.post('http://localhost:8080/eliminar-c',cita, {headers : headers})
     .map(res => res.json());
 
   }
 
   todasCitas(){
-    return this.http.get('http://localhost:3000/todas-citas')
+    return this.http.get('http://localhost:8080/todas-citas')
     .map(res => res.json());
   }
 
@@ -130,7 +130,7 @@ todosUsuarios(){
 buscarUsuario(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/buscar-u', user, {headers : headers})
+    return this.http.post('http://localhost:8080/buscar-u', user, {headers : headers})
     .map(res => res.json());
   }
 
@@ -138,14 +138,14 @@ buscarUsuario(user){
   buscarVehiculo(vehiculo){
    let headers = new Headers();
    headers.append('Content-Type', 'application/json');
-   return this.http.post('http://localhost:3000/buscar-v', vehiculo, {headers : headers})
+   return this.http.post('http://localhost:8080/buscar-v', vehiculo, {headers : headers})
    .map(res => res.json());
   }
 
   asignarFecha(cita){
     let headers = new Headers();
    headers.append('Content-Type', 'application/json');
-   return this.http.post('http://localhost:3000/update-c',cita,{headers : headers})
+   return this.http.post('http://localhost:8080/update-c',cita,{headers : headers})
    .map(res => res.json());
   }
 
@@ -153,7 +153,7 @@ buscarUsuario(user){
   updateVehiculo(vehiculo){
     let headers = new Headers();
    headers.append('Content-Type', 'application/json');
-   return this.http.post('http://localhost:3000/update-v',vehiculo, {headers : headers})
+   return this.http.post('http://localhost:8080/update-v',vehiculo, {headers : headers})
    .map(res => res.json());
   }
 
@@ -161,9 +161,35 @@ buscarUsuario(user){
   updateUsuario(user){
     let headers = new Headers();
    headers.append('Content-Type', 'application/json');
-   return  this.http.post('http://localhost:3000/update-u',user,{headers :headers})
+   return  this.http.post('http://localhost:8080/update-u',user,{headers :headers})
    .map(res => res.json());
   }
 
+  cargar(foto){
+  let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/cargar',foto,{headers :headers})
+   .map(res => res.json());  
+  }
+
+  todosRepuestos(){
+    return this.http.get('http://localhost:8080/todos-r')
+    .map(res => res.json());
+  }
+
+
+  updateRepuesto(selectedRepuesto){
+   let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/update-rep',selectedRepuesto,{headers :headers})
+   .map(res => res.json());  
+  }
+
+  registerRepuesto(repuesto){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/register-rep',repuesto,{headers :headers})
+   .map(res => res.json()); 
+  }
 
 }

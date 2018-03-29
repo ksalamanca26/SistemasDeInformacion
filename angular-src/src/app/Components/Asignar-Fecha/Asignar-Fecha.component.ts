@@ -13,10 +13,10 @@ export class AsignarFechaComponent implements OnInit {
 
 	citas : any[];
 	selectedCita : any;
-	cliente : any;
-	vehiculo : any;
 	fecha : Date;
 	hora : String;
+
+  columnas : any[];
 
   constructor(private authService : AuthService,
   	private validateService : ValidateService,
@@ -27,58 +27,44 @@ export class AsignarFechaComponent implements OnInit {
 
   	this.authService.todasCitas().subscribe(data=>{
   		if(data){
-  			this.citas=data;
+        console.log(data);
+  			this.citas=data[0];
   		}
   	});
 
+    this.columnas= ["Nombre", "Apellido", "Email", "Modelo", "Placa", "Año", "Estado Vehiculo"];
+
   }
 
-  onSelect(){
+  onClick(cita){
+    this.selectedCita=cita;
+    console.log(this.selectedCita);
+  }
+
+
+  onAsignarFecha(){
+
+    console.log("Entré");
 
   	if(!this.validateService.validateDetallesCita(this.selectedCita)){
   		this.flashMessage.show("Por favor seleccione una cita", {cssClass : 'alert-danger', timeout : 3000})
   		return false;
   	}
 
-  	const user = {
-  		idUsuario : this.selectedCita.idUsuario
-  	}
-
-  	this.authService.buscarUsuario(user).subscribe(data=>{
-  		if(data){
-  			this.cliente=data;
-  		}
-  	});
-
-
-  	const carro = {
-  		idVehiculo : this.selectedCita.idVehiculo
-  	}
-
-  	this.authService.buscarVehiculo(carro).subscribe(data=>{
-  		if(data){
-  			this.vehiculo=data;
-  		}
-  	})
-
-  }
-
-
-  onSubmit(){
-
-  	if(!this.validateService.validateDetallesCita(this.selectedCita)){
-  		this.flashMessage.show("Por favor seleccione una cita", {cssClass : 'alert-danger', timeout : 3000})
-  		return false;
-  	}
+    if(this.selectedCita.fechaAsignada == undefined || this.selectedCita.Hora == undefined){
+      this.flashMessage.show("Por favor rellene todos los campos", {cssClass : 'alert-danger', timeout : 3000})
+      return false;
+    }
 
 
   	const cita = {
   		idCita : this.selectedCita.idCita,
-  		fecha : this.fecha,
-  		hora : this.hora
+  		fecha : this.selectedCita.fechaAsignada,
+  		hora : this.selectedCita.Hora,
+      email : this.selectedCita.Email
   	}
+      	this.authService.asignarFecha(cita).subscribe(data=>{
 
-  	this.authService.asignarFecha(cita).subscribe(data=>{
   		if(data.success){
   			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000});
   			this.router.navigate(['dashboard-gerente']);

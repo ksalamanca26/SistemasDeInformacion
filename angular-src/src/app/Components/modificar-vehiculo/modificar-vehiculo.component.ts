@@ -14,6 +14,7 @@ export class ModificarVehiculoComponent implements OnInit {
 
 	vehiculos : any[];
 	selectedVehiculo : any;
+  columnas : any[];
 
   constructor(private authService : AuthService,
   	private validateService : ValidateService,
@@ -25,9 +26,17 @@ export class ModificarVehiculoComponent implements OnInit {
   	const user = this.authService.user;
   	this.authService.buscarVehiculos(user).subscribe(data=>{
   		if(data){
+        console.log(data);
   			this.vehiculos=data
   		}
   	});
+
+
+    this.columnas= ["Modelo", "Year", "Serial", "Placa", "Estado", "fechaRegistro"];
+  }
+
+  onClick(vehiculo){
+    this.selectedVehiculo=vehiculo;
   }
 
 
@@ -59,7 +68,7 @@ export class ModificarVehiculoComponent implements OnInit {
   	}
 
 
-  	if(!this.validateService.validateRegisterV(carro)){
+  	if(!this.validateService.validateUpdateV(carro)){
   		this.flashMessage.show("Por favor rellene todos los campos",{cssClass : 'alert-danger', timeout : 3000})
   		return false;
   	}

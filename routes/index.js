@@ -1,25 +1,38 @@
 const express= require('express');
 const router= express.Router();
 const path = require('path');
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
+const fs =require('fs');
+const nodemailer= require('nodemailer');
 const bcrypt = require('bcryptjs');
 const sequelize= require('sequelize');
-var connection= new sequelize('taller', 'root', 'password', {
+var connection;
 
-	dialect : 'mysql',
-	define : {
 
-		freezeTableName : true,
-		timestamps : false
+connection = new sequelize("taller", "root", "password", {
 
-	}
+  dialect : 'mysql',
 
+  define : {
+
+     freezeTableName : true,
+     timestamps : false
+  }
+
+});
+
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'mecametca@gmail.com',
+    pass: 'mecamet123'
+  }
 });
 
 var Usuario = connection.import('../models/usuario');
 var Vehiculo = connection.import('../models/vehiculo');
 var Cita = connection.import('../models/cita');
+var Repuesto = connection.import('../models/repuesto');
 
 router.get('/register', (req, res, next) => {
 res.send('REGISTER');
@@ -59,10 +72,6 @@ catch(err){
 
 });
 
-router.get('/authenticate', (req, res, next) => {
-res.send('AUTHENTICATE');
-	});
-
 
 router.post('/authenticate', (req, res, next) => {
 
@@ -86,6 +95,7 @@ bcrypt.compare(req.body.password, usuario.dataValues.Contraseña).then(function(
 
 
 	if(val){
+
 		res.json({success : true, 
 			user : {
 				id : usuario.dataValues.idUsuario,
@@ -220,6 +230,7 @@ router.post('/registrar-c', (req, res, next) => {
 	
 	
 	}).then(json => {
+
 
 		res.json({success : true, msg : 'Cita solicitada'})
 	});
@@ -372,16 +383,12 @@ router.get('/todas-citas', (req, res, next) =>{
 
 try{
 
-	Cita.findAll({
-		where : {
-			Estado : "Solicitada"
-		}
-	}).then(json =>{
-
+	connection.query("select usuario.Nombre, usuario.Apellido, usuario.Email, vehiculo.Modelo, vehiculo.Placa, vehiculo.Year as Año, vehiculo.Estado as 'Estado Vehiculo' from cita inner join usuario on cita.idUsuario = usuario.idUsuario inner join vehiculo on vehiculo.idVehiculo = cita.idVehiculo where cita.Estado = 'Solicitada';")
+	.then(json =>{
 		res.send(json);
-	})
+	}
 
-}
+)}
 
 
 catch(err){
@@ -446,6 +453,20 @@ router.post('/update-c', (req, res, next) =>{
 			idCita : req.body.idCita
 		}
 	}).then(json=>{
+			var mailOptions = {
+  			from: 'mecametca@gmail.com',
+  			to: req.body.email,
+ 			subject: 'Cita asignada',
+  			text: 'Estimado usuario, se le ha asignado una cita para el '+ req.body.fecha+' a las '+req.body.hora+' .'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
 		res.json({success :true, msg : "Fecha asignada"});
 	})	
 	}
@@ -508,6 +529,70 @@ router.post('/update-u', (req, res, next) =>{
 	}
 	
 });
+
+
+
+router.get('/todos-r', (req, res, next) =>{
+
+	try{
+	Repuesto.findAll().then(json=>{
+		res.send(json);
+	})	
+	}
+
+	
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+
+});
+
+
+router.post('/update-rep', (req, res, next) =>{
+
+	try{
+
+		Repuesto.update({
+			Nombre : req.body.Nombre,
+			Serial : req.body.Serial,
+			Cantidad : req.body.Cantidad,
+			Tipo : req.body.Tipo
+		},
+		{where : {
+			idRepuesto : req.body.idRepuesto
+		}}).then(json=>{
+			res.json({success : true, msg : "Repuesto actualizado"});
+		})
+
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+});
+
+
+router.post('/register-rep', (req, res, next) =>{
+
+
+	try{
+		Repuesto.create({
+			Nombre : req.body.Nombre,
+			Serial : req.body.Serial,
+			Cantidad : req.body.Cantidad,
+			Tipo : req.body.Tipo
+		}).then(json =>{
+			res.json({success : true, msg : "Repuesto registrado"});
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+})
 
 
 

@@ -10,6 +10,7 @@ import {FlashMessagesService} from "angular2-flash-messages";
 })
 export class AppComponent {
   title = 'app';
+  user : any;
 
 
   constructor(private validateService : ValidateService,
@@ -18,11 +19,13 @@ export class AppComponent {
   	private router : Router) { }
 
   ngOnInit() {
+    this.user=this.authService.user;
   }
 
   onLogoutClick(){
 
   	this.authService.logout();
+    this.user=undefined;
   	this.flashMessage.show("Sesión cerrada",{cssClass : 'alert-success', timeout : 5000});
   	this.router.navigate(['inicio']);
   	return false;

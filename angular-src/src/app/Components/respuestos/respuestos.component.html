@@ -1,66 +1,114 @@
-
 <div class="container">
-    <h1>Repuestos</h1>
-    
-        <ul class="collection">
-            <li class="collection-item avatar">
-                <i class="material-icons circle">settings</i>
-              <span class="title">Chevrolet</span>
-              <p>Motor <br>
-                 250656525
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons"></i></a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle">settings</i>
-              <span class="title">Mercedes Benz</span>
-              <p>Puerta <br>
-                125625663
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons"></i></a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle ">settings</i>
-              <span class="title">Toyota</span>
-              <p>Vidrio trasero<br>
-                 852585258
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons"></i></a>
-            </li>
-            <li class="collection-item avatar">
-              <i class="material-icons circle ">settings</i>
-              <span class="title">BMW</span>
-              <p>Compresor<br>
-                 878965236
-              </p>
-              <a href="#!" class="secondary-content"><i class="material-icons"></i></a>
-            </li>
-          </ul>
-          <a class="waves-effect waves-light btn">Agregar</a>
-          <a class="waves-effect waves-light btn">Modificar</a>
-      <h1> </h1>
-      </div>
+<div class="row">
+  <h1> Repuestos </h1>
 
-      <footer class="page-footer black">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Mecamet C.A</h5>
-                <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                
-                <ul>
-                  
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            © 2018 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!"></a>
-            </div>
-          </div>
-        </footer>
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnas">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let repuesto of repuestos">
+            <td *ngFor="let col of columnas" >{{repuesto[col]}}</td>
+            <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(repuesto)"><i class="material-icons">edit</i></a>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <button (click) = "onNuevo()" class="btn btn-primary">Agregar Nuevo Repuesto</button>
+  <h1> </h1>
+
+    <div *ngIf="selectedRepuesto && !nuevo">
+      <form (submit) = "onUpdate()" class="col s12">
+      <div class="row">
+        <div class="col s6">
+        <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" [(ngModel)]= "selectedRepuesto.Nombre" name = "nombre" placeholder = "nombre"  class="validate">
+          
+        </div>
+        <div class="col s6">
+          <label for="modelo">Serial</label>
+          <input id="serial" type="text" [(ngModel)]= "selectedRepuesto.Serial" name = "serial" placeholder="serial" class="validate">
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <label for="cant">Cantidad</label>
+          <input id="cant" type="text" [(ngModel)]= "selectedRepuesto.Cantidad" name = "cant" placeholder="cant" class="validate">
+          
+        </div>
+        <div class="col s6">
+          <label for="tipo">Tipo</label>
+          <input id="tipo" type="text" [(ngModel)]= "selectedRepuesto.Tipo" name = "tipo" placeholder="tipo" class="validate">
+          
+        </div>
+        </div>
+     <h1></h1>
+       <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>
+
+
+
+
+
+
+<div *ngIf="nuevo">
+  <form (submit) = "onSubmit()" class="col s12">
+      <div class="row">
+        <div class="col s6">
+        <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" [(ngModel)]= "nombre" name = "nombre" class="validate">
+          
+        </div>
+        <div class="col s6">
+          <label for="modelo">Serial</label>
+          <input id="serial" type="text" [(ngModel)]= "serial" name = "serial" class="validate">
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s6">
+          <label for="cant">Cantidad</label>
+          <input id="cant" type="text" [(ngModel)]= "cantidad" name = "cant" class="validate">
+          
+        </div>
+        <div class="col s6">
+          <label for="tipo">Tipo</label>
+          <input id="tipo" type="text" [(ngModel)]= "tipo" name = "tipo" class="validate">
+          
+        </div>
+        </div>
+     <h1></h1>
+       <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+    
+  </div>
+</div>
+
+<footer class="page-footer black">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Mecamet C.A</h5>
+          <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          
+          <ul>
             
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      © 2018 Copyright Text
+      <a class="grey-text text-lighten-4 right" href="#!"></a>
+      </div>
+    </div>
+  </footer>

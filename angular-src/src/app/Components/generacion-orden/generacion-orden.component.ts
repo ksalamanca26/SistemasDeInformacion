@@ -15,6 +15,7 @@ export class GeneracionOrdenComponent implements OnInit {
 	selectedCita : any;
 	cliente : any;
 	vehiculo : any;
+  foto : any;
 
 	
 
@@ -61,6 +62,23 @@ export class GeneracionOrdenComponent implements OnInit {
   	});
 
   }
+
+
+  cargar(){
+
+    console.log(this.foto);
+    this.authService.cargar(this.foto).subscribe(data=>{
+      if(data.success){
+        this.flashMessage.show("Se cargó la foto", {cssClass : 'alert-success', timeout : 3000});
+      }
+
+      else{
+        this.flashMessage.show("No se cargó", {cssClass : 'alert-danger', timeout : 3000});
+      }
+
+    })
+  }
+
 
 
 

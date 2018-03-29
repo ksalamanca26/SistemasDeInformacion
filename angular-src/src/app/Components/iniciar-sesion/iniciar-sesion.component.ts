@@ -3,6 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -17,6 +18,7 @@ export class IniciarSesionComponent implements OnInit {
   constructor(private validateService : ValidateService,
   	private authService : AuthService,
   	private flashMessage : FlashMessagesService,
+    private appComponent : AppComponent,
   	private router : Router) { }
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class IniciarSesionComponent implements OnInit {
   	this.authService.loginUser(user).subscribe(data =>{
   		if(data.success){
         this.authService.storeUserData(data.user);
+        this.appComponent.user=data.user;
   			this.flashMessage.show("Bienvenido "+data.user.nombre, {cssClass : "alert-success", timeout : 5000});
         if(data.user.rol ==1){
           this.router.navigate(['/dashboard']);

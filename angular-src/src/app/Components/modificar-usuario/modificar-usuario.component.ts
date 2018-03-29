@@ -40,7 +40,7 @@ export class ModificarUsuarioComponent implements OnInit {
 
   	}
 
-  	if(!this.validateService.validateRegister(user)){
+  	if(!this.validateService.validateUpdateU(user)){
   		this.flashMessage.show("Por favor rellene todos los campos",{cssClass : 'alert-danger', timeout : 3000});
   		return false;
   	}

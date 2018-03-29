@@ -1,20 +1,25 @@
 <div class="container">
 <div class="row">
-  <h1> Modificar Vehículo</h1>
+  <h1> Mis Vehículos</h1>
 
-  <select [(ngModel)]= "selectedVehiculo" name = "selectedVehiculo" class="browser-default">
-      <option value="" disabled selected>Seleccione el vehículo</option>
-       <option *ngFor="let vehiculo of vehiculos" [ngValue]="vehiculo">{{ vehiculo.Modelo }} {{vehiculo.Year}} </option>
-    </select>
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnas">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let vehiculo of vehiculos">
+            <td *ngFor="let col of columnas" >{{vehiculo[col]}}</td>
+            <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(vehiculo)"><i class="material-icons">edit</i></a>
+          </tr>
+        </tbody>
+      </table>
   <h1> </h1>
     <div *ngIf="selectedVehiculo">
 
-    	<div *ngIf="selectedVehiculo.Estado=='Activo'">
-     	<button (click)="onActivarDesactivar()" class="btn btn-primary">Desactivar</button>
-     </div>
-     <div *ngIf="selectedVehiculo.Estado=='Desactivado'">
-     	<button (click)="onActivarDesactivar()" class="btn btn-primary">Activar</button>
-     </div>
+    
          <br>
     	<form (submit) = "onSubmit()" class="col s12">
       <div class="row">
@@ -41,8 +46,14 @@
           
         </div>
       </div>
-      
-       <button type="submit" class="btn btn-primary">Modificar</button>
+        <div *ngIf="selectedVehiculo.Estado=='Activo'">
+      <button (click)="onActivarDesactivar()" class="btn btn-primary">Desactivar</button>
+     </div>
+     <div *ngIf="selectedVehiculo.Estado=='Desactivado'">
+      <button (click)="onActivarDesactivar()" class="btn btn-primary">Activar</button>
+     </div>
+     <h1></h1>
+       <button type="submit" class="btn btn-primary">Guardar Cambios</button>
     </form>
 </div>
 
