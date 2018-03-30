@@ -3,7 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
-
+import { toast } from "angular2-materialize";
 @Component({
   selector: 'app-generacion-orden',
   templateUrl: './generacion-orden.component.html',
@@ -37,7 +37,7 @@ export class GeneracionOrdenComponent implements OnInit {
   onSelect(){
 
   	if(!this.validateService.validateDetallesCita(this.selectedCita)){
-  		this.flashMessage.show("Por favor seleccione una cita",{cssClass : 'alert-danger', timeout : 3000})
+      toast("Por favor seleccione una cita", 3000);
   		return false;
   	}
 
@@ -64,23 +64,9 @@ export class GeneracionOrdenComponent implements OnInit {
   }
 
 
-  cargar(){
-
-    console.log(this.foto);
-    this.authService.cargar(this.foto).subscribe(data=>{
-      if(data.success){
-        this.flashMessage.show("Se cargó la foto", {cssClass : 'alert-success', timeout : 3000});
-      }
-
-      else{
-        this.flashMessage.show("No se cargó", {cssClass : 'alert-danger', timeout : 3000});
-      }
-
-    })
   }
 
 
 
 
 
-}

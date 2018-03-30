@@ -3,6 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
+import { toast } from "angular2-materialize";
 
 @Component({
   selector: 'app-cancelar-cita',
@@ -35,7 +36,7 @@ export class CancelarCitaComponent implements OnInit {
 
   onSelect(){
     if(!this.validateService.validateDetallesCita(this.selectedCita)){
-      this.flashMessage.show("Por favor seleccione una cita", {cssClass : 'alert-danger', timeout : 3000})
+      toast("Por favor seleccione una cita",3000);
       return false;
     }
 
@@ -65,8 +66,7 @@ export class CancelarCitaComponent implements OnInit {
   onDeleteSubmit(){
 
   	if(!this.validateService.validateDeleteC(this.selectedCita)){
-
-  		this.flashMessage.show("Por favor seleccione una cita",{cssClass : 'alert-danger', timeout : 3000})
+      toast("Por favor seleccione una cita", 3000);
   		return false;
 
   	}
@@ -74,12 +74,12 @@ export class CancelarCitaComponent implements OnInit {
 
   	this.authService.deleteCita(this.selectedCita).subscribe(data=>{
   		if(data.success){
-  			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000})
+        toast(data.msg, 3000);
   			this.router.navigate(['dashboard']);
   		}
 
   		else{
-  			this.flashMessage.show("Algo salio mal", {cssClass : 'alert-danger', timeout : 3000})
+        toast("Algo salio mal", 3000);
   			this.router.navigate(['dashboard']);
   		}
   	})

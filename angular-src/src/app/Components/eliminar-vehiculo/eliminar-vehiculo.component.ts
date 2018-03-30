@@ -3,7 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
-
+import { toast } from "angular2-materialize";
 @Component({
   selector: 'app-eliminar-vehiculo',
   templateUrl: './eliminar-vehiculo.component.html',
@@ -39,19 +39,19 @@ export class EliminarVehiculoComponent implements OnInit {
   	}
 
   	if(!this.validateService.validateDeleteV(this.idVehiculo)){
-  		this.flashMessage.show("Por favor seleccione el vehículo que desea eliminar", {cssClass : 'alert-danger', timeout : 3000});
+      toast("Por favor seleccione el vehículo que desea eliminar", 3000);
   		return false;
   	}
 
   	this.authService.deleteVehiculo(vehiculo).subscribe(data =>{
 
   		if(data.success){
-  			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000})
+        toast(data.msg, 3000);
   			this.router.navigate(['dashboard-usuario']);
   		}
 
   		else{
-  			this.flashMessage.show(data.msg, {cssClass : 'alert-danger', timeout : 3000})
+        toast(data.msg, 3000);
   			this.router.navigate(['dashboard-usuario']);
   		}
 

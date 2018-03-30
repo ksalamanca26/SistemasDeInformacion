@@ -3,7 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
-
+import { toast } from "angular2-materialize";
 @Component({
   selector: 'app-Asignar-Fecha',
   templateUrl: './Asignar-Fecha.component.html',
@@ -47,12 +47,12 @@ export class AsignarFechaComponent implements OnInit {
     console.log("Entré");
 
   	if(!this.validateService.validateDetallesCita(this.selectedCita)){
-  		this.flashMessage.show("Por favor seleccione una cita", {cssClass : 'alert-danger', timeout : 3000})
+      toast("Por favor seleccione una cita", 3000);
   		return false;
   	}
 
     if(this.selectedCita.fechaAsignada == undefined || this.selectedCita.Hora == undefined){
-      this.flashMessage.show("Por favor rellene todos los campos", {cssClass : 'alert-danger', timeout : 3000})
+      toast("Por favor rellene todos los campos", 3000);
       return false;
     }
 
@@ -66,12 +66,12 @@ export class AsignarFechaComponent implements OnInit {
       	this.authService.asignarFecha(cita).subscribe(data=>{
 
   		if(data.success){
-  			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000});
+        toast(data.msg, 3000);
   			this.router.navigate(['dashboard-gerente']);
   		}
 
   		else{
-  			this.flashMessage.show("Algo salió mal", {cssClass : 'alert-danger', timeout : 3000});
+        toast("Algo salió mal", 3000);
   			this.router.navigate(['dashboard-gerente']);
   		}
   	})

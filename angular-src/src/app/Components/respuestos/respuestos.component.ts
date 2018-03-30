@@ -3,6 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
+import { toast } from "angular2-materialize";
 @Component({
   selector: 'app-respuestos',
   templateUrl: './respuestos.component.html',
@@ -24,7 +25,7 @@ export class RespuestosComponent implements OnInit {
   constructor(private authService : AuthService,
   	private validateService : ValidateService,
   	private flashMessage : FlashMessagesService,
-  	private router : Router) { }
+  	private router : Router,) { }
 
   ngOnInit() {
 
@@ -51,18 +52,18 @@ export class RespuestosComponent implements OnInit {
   onUpdate(){
 
   if(!this.validateService.validateUpdateRepuesto(this.selectedRepuesto)){
-  	this.flashMessage.show("Por favor rellene todos los campos", {cssClass : 'alert-danger', timeout : 3000})
+  	toast("Por favor rellene todos los campos", 3000);
   	return false;
   }
 
   	this.authService.updateRepuesto(this.selectedRepuesto).subscribe(data =>{
   		if(data.success){
-  			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000});
+  			toast(data.msg, 3000);
   			this.router.navigate(['dashboard-usuario']);
   		}
 
   		else{
-  			this.flashMessage.show("Algo salió mal", {cssClass : 'alert-danger', timeout : 3000});
+  			toast("Algo salió mal", 3000);
   			this.router.navigate(['dashboard-usuario']);
   		}
   	})
@@ -81,19 +82,19 @@ export class RespuestosComponent implements OnInit {
   	}
 
  	if(!this.validateService.validateDetallesRepuesto(repuesto)){
- 		this.flashMessage.show("Por favor rellene todos los campos", {cssClass : 'alert-danger', timeout : 3000})
+ 		toast("Por favor rellene todos los campos", 3000);
  		return false;
  	}
 
  	this.authService.registerRepuesto(repuesto).subscribe(data =>{
  		if(data.success){
- 			this.flashMessage.show(data.msg, {cssClass : 'alert-success', timeout : 3000})
+ 			toast(data.msg, 3000);
  			this.router.navigate(['dashboard-usuario']);
  		}
 
 
  		else{
- 			this.flashMessage.show("Algo salió mal", {cssClass : 'alert-danger', timeout : 3000})
+ 			toast("Algo salió mal", 3000);
  			this.router.navigate(['dashboard-usuario']);
  		}
 

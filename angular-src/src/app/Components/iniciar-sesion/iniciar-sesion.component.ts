@@ -4,6 +4,7 @@ import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
 import { AppComponent } from '../../app.component';
+import { toast } from "angular2-materialize";
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -32,12 +33,12 @@ export class IniciarSesionComponent implements OnInit {
   	}
 
   	if(!this.validateService.validateLogin(user)){
-  		this.flashMessage.show("Por favor rellene todos los campos", { cssClass : 'alert-danger', timeout : 3000 });
+      toast("Por favor rellene todos los campos", 3000);
   		return false;
   	}
 
   	if(!this.validateService.validateEmail(user.email)){
-  		this.flashMessage.show("Por favor ingrese un email válido", { cssClass : 'alert-danger', timeout : 3000 });
+      toast("Por favor ingrese un email válido", 3000);
   		return false;
   	}	
 
@@ -46,7 +47,7 @@ export class IniciarSesionComponent implements OnInit {
   		if(data.success){
         this.authService.storeUserData(data.user);
         this.appComponent.user=data.user;
-  			this.flashMessage.show("Bienvenido "+data.user.nombre, {cssClass : "alert-success", timeout : 5000});
+        toast("Bienvenido "+data.user.nombre, 3000);
         if(data.user.rol ==1){
           this.router.navigate(['/dashboard']);
         }
@@ -65,7 +66,7 @@ export class IniciarSesionComponent implements OnInit {
   		}
 
   		else{
-  			this.flashMessage.show(data.msg, {cssClass : 'alert-danger', timeout : 3000});
+        toast(data.msg, 3000);
   		}
   	});
   }

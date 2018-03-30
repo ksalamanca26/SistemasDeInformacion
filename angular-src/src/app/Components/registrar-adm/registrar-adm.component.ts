@@ -3,7 +3,7 @@ import {ValidateService} from '../../services/validate.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {FlashMessagesService} from "angular2-flash-messages";
-
+import { toast } from "angular2-materialize";
 @Component({
   selector: 'app-registrar-adm',
   templateUrl: './registrar-adm.component.html',
@@ -39,24 +39,24 @@ export class RegistrarAdmComponent implements OnInit {
   }
 
   	if(!this.validateService.validateRegister(user)){
-  		this.flashMessage.show("Por favor rellene todos los campos", {cssClass : 'alert-danger', timeout : 3000});
+      toast("Por favor rellene todos los campos", 3000);
   		return false;
   	}
 
   	if(!this.validateService.validateEmail(user.email)){
-  		this.flashMessage.show("Por favor ingrese un email válido",{cssClass : 'alert-danger', timeout : 3000});
+      toast("Por favor ingrese un email válido", 3000);
   		return false;
   	}
 
   	this.authService.registerUser(user).subscribe(data =>{
 
   		if(data.success){
-  			this.flashMessage.show("Usuario registrado", {cssClass : 'alert-success', timeout : 5000});
+        toast("Usuario registrado", 3000);
   			this.router.navigate(['dashboard-usuario']);
   		}
 
   		else{
-  			this.flashMessage.show("Algo salió mal", {cssClass : 'alert-danger', timeout : 5000});
+        toast("Algo salió mal", 3000);
   			this.router.navigate(['dashboard-usuario']);
   		}
 
