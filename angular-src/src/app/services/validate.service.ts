@@ -158,4 +158,16 @@ validateUpdateRepuesto(repuesto){
 	}
 }
 
+
+validateRegisterOrden(orden){
+	if(orden.herramientas == undefined || orden.llaves == undefined || orden.caucho == undefined || orden.accesorios == undefined || orden.gato == undefined || orden.sonido == undefined || orden.carroceria == undefined || orden.idVehiculo == undefined || orden.idUsuario == undefined)
+	{
+		return false;
+	}
+
+	else{
+		return true;
+	}
+}
+
 }

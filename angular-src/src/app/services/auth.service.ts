@@ -95,6 +95,11 @@ todosUsuarios(){
   .map(res => res.json());
 }
 
+  todosMecanicos(){
+      return this.http.get('http://localhost:8080/todos-mecanicos')
+  .map(res => res.json());
+  }
+
 
   updateRol(user){
     let headers = new Headers();
@@ -123,6 +128,11 @@ todosUsuarios(){
 
   todasCitas(){
     return this.http.get('http://localhost:8080/todas-citas')
+    .map(res => res.json());
+  }
+
+  citasAsignadas(){
+    return this.http.get('http://localhost:8080/asignadas-citas')
     .map(res => res.json());
   }
 
@@ -189,6 +199,13 @@ buscarUsuario(user){
     let headers = new Headers();
    headers.append('Content-Type', 'application/json');
    return  this.http.post('http://localhost:8080/register-rep',repuesto,{headers :headers})
+   .map(res => res.json()); 
+  }
+
+  registerOrden(orden){
+     let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/register-o',orden,{headers :headers})
    .map(res => res.json()); 
   }
 

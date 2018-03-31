@@ -1,13 +1,12 @@
 <nav class="nav-extended">
     <div class="nav-wrapper black">
       <a href="#" class="brand-logo center">Mecamet</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a (click)="onLogoutClick()" href="#">Salir</a></li>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">      
+        <li><a *ngIf="user"(click)="onLogoutClick()" href="#">Salir</a></li>
       
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a (click)="onLogoutClick()" href="#">Salir</a></li>
+        <li><a *ngIf="user" (click)="onLogoutClick()" href="#">Salir</a></li>
 
       </ul>
     </div>
@@ -28,12 +27,4 @@
       </ul>
     </div>
 </nav>
-
-<script>
-    // Initialize collapse button
-    $(".button-collapse").sideNav();
-    // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-    //$('.collapsible').collapsible();
-    </script>
-    
 <router-outlet></router-outlet>

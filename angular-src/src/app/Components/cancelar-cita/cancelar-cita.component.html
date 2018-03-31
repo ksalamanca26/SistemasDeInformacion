@@ -3,42 +3,20 @@
     <h1> Cancelar Cita</h1>
     
      
-      <select [(ngModel)]= "selectedCita" name = "selectedCita" class="browser-default">
-      <label>Seleccione la cita</label>  
-      <option value="" disabled selected>Seleccione la cita</option>
-       <option *ngFor="let cita of citas" [ngValue]="cita">Cita</option>
-    </select>
+      <table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnas">{{col}}</th>
+          </tr>
+        </thead>
 
-    <button class="btn waves-effect waves-light" (click)="onSelect()">Ver Detalles
-  </button>
-
-    <div *ngIf="cliente && vehiculo">
-      
-<ul class="collection">
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">account_box</i>
-      <span class="title">Cliente</span>
-      <p> Nombre: {{cliente.Nombre}} <br>
-         Apellido: {{cliente.Apellido}}
-      </p>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">directions_car</i>
-      <span class="title">Vehículo</span>
-      <p>Modelo: {{vehiculo.Modelo}}
-         
-      </p>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">event_note</i>
-      <span class="title">Estado de la cita</span>
-      <p> 
-         {{selectedCita.Estado}}
-      </p>
-    </li>
-  </ul>
-
-    </div>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td *ngFor="let col of columnas" >{{cita[col]}}</td>
+            <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(cita)"><i class="material-icons">edit</i></a>
+          </tr>
+        </tbody>
+      </table>
      <br>
      <br>
       <form (submit)="onDeleteSubmit()" class="col s12">

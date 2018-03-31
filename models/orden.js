@@ -19,7 +19,7 @@ return sequelize.define('orden', {
 
 	},
 
-	Diagnostico : {
+	Sonido : {
 
 		type : DataTypes.STRING,
 		allowNull : true

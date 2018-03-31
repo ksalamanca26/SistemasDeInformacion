@@ -1,95 +1,66 @@
 <div class="container">
 <h1>Gestion de Orden</h1>
-<label>Seleccione la Cita</label>
-  <select [(ngModel)]= "selectedCita" name = "selectedCita" class="browser-default">
-    <option value="" disabled selected>Choose your option</option>
-    <option *ngFor="let cita of citas" [ngValue]="cita">{{cita.fechaSolicitud}} {{cita.Hora}} </option>
-  </select>
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnas">{{col}}</th>
+          </tr>
+        </thead>
 
-  <button (click) = "onSelect()" class="btn btn-primary">Ver Detalles</button>
+        <tbody>
+          <tr *ngFor="let cita of citas">
+            <td *ngFor="let col of columnas" >{{cita[col]}}</td>
+            <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(cita)"><i class="material-icons">edit</i></a>
+          </tr>
+        </tbody>
+      </table>
 
-<div *ngIf="cliente && vehiculo">
-<ul class="collection">
-    <li class="collection-item avatar">
-      <i class="material-icons circle blue">account_box</i>
-      <span class="title">Cliente</span>
-      <p> Nombre: {{cliente.Nombre}} <br>
-         Apellido: {{cliente.Apellido}}
-      </p>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">directions_car</i>
-      <span class="title">Vehículo</span>
-      <p>Modelo: {{vehiculo.Modelo}} <br>
-         Año :  {{vehiculo.Year}}
-      </p>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle green">insert_chart</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-    <li class="collection-item avatar">
-      <i class="material-icons circle red">play_arrow</i>
-      <span class="title">Title</span>
-      <p>First Line <br>
-         Second Line
-      </p>
-      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-    </li>
-  </ul>
-           
-</div>
+<div *ngIf="selectedCita">
 
-
-  <form (submit)= "cargar()" class="col s12">
+   <form (submit)= "onSubmit()" class="col s12">
       <div class="row">
-        <div class="input-field col s6">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">Diagnóstico</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Mecánico Asignado</label>
+        <div class="col s6">
+      <label for="selectedMecanico">Mecánico Asignado</label>
+      <select [(ngModel)]= "selectedMecanico" name = "selectedMecanico" class="browser-default">
+      <option value="" disabled selected>Seleccione el vehículo</option>
+       <option *ngFor="let mecanico of mecanicos" [ngValue]="mecanico">{{ mecanico.Nombre}}  {{mecanico.Apellido}}</option>
+    </select>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Accesorios Encontrados</label>
+          <input [(ngModel)]= "accesorios" name="accesorios" id="accesorios" type="text" class="validate">
+          <label for="accesorios">Accesorios Encontrados</label>
         </div>
         <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Caucho de Repuesto</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Llaves</label>
-        </div>
-        <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Gato</label>
+          <input [(ngModel)]= "caucho" name="caucho" id="caucho" type="text" class="validate">
+          <label for="caucho">Caucho de Repuesto</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Herramientas</label>
+          <input [(ngModel)]= "llaves" name="llaves" id="llaves" type="text" class="validate">
+          <label for="llaves">Llaves</label>
         </div>
         <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Frontal de Equipo de Sonido</label>
+          <input [(ngModel)]= "gato" name="gato" id="gato" type="text" class="validate">
+          <label for="gato">Gato</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s6">
-          <input id="password" type="text" class="validate">
-          <label for="password">Desperfecto en la Carrocería</label>
+          <input [(ngModel)]= "herramientas" name="herramientas" id="herramientas" type="text" class="validate">
+          <label for="herramientas">Herramientas</label>
+        </div>
+        <div class="input-field col s6">
+          <input [(ngModel)]= "sonido" name="sonido" id="sonido" type="text" class="validate">
+          <label for="soindo">Frontal de Equipo de Sonido</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <input [(ngModel)]= "carroceria" name="carroceria" id="carroceria" type="text" class="validate">
+          <label for="carroceria">Desperfecto en la Carrocería</label>
         </div>
       </div>
 
@@ -105,7 +76,11 @@
             </div>
           </div>
        <button type="submit" class="btn btn-primary">Listo</button>
-    </form>
+    </form>        
+</div>
+
+
+  
     </div>
 
   <h1></h1>    

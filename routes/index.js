@@ -33,6 +33,7 @@ var Usuario = connection.import('../models/usuario');
 var Vehiculo = connection.import('../models/vehiculo');
 var Cita = connection.import('../models/cita');
 var Repuesto = connection.import('../models/repuesto');
+var Orden = connection.import('../models/orden');
 
 router.get('/register', (req, res, next) => {
 res.send('REGISTER');
@@ -297,6 +298,34 @@ router.get('/todos-usuarios', (req, res, next) =>{
 
 });
 
+router.get('/todos-mecanicos', (req, res, next) =>{
+
+	try{
+
+		Usuario.findAll({
+			where : {
+				Rol : 2
+			}
+		}).then(json =>{
+
+			if(json!=undefined){
+				res.send(json)
+			}
+
+			else{
+				res.json({success : false, msg : "Esta undefined"})
+			}
+
+		})
+
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"})
+	}
+
+});
+
 
 router.post('/update-r', (req, res, next) =>{
 
@@ -327,11 +356,7 @@ router.post('/buscar-c', (req, res, next) =>{
 
 	try{
 
-		Cita.findAll({
-			where : {
-				idUsuario : req.body.id
-			}
-		}).then(json =>{
+		connection.query("select cita.*, vehiculo.Modelo, vehiculo.Placa, cita.Estado as 'Estado Cita' from cita inner join usuario on cita.idUsuario = usuario.idUsuario inner join vehiculo on cita.idVehiculo = vehiculo.idVehiculo where cita.idUsuario="+req.body.id).then(json =>{
 			if(json!=undefined){
 			res.send(json)	
 			}
@@ -383,7 +408,29 @@ router.get('/todas-citas', (req, res, next) =>{
 
 try{
 
-	connection.query("select usuario.Nombre, usuario.Apellido, usuario.Email, vehiculo.Modelo, vehiculo.Placa, vehiculo.Year as Año, vehiculo.Estado as 'Estado Vehiculo' from cita inner join usuario on cita.idUsuario = usuario.idUsuario inner join vehiculo on vehiculo.idVehiculo = cita.idVehiculo where cita.Estado = 'Solicitada';")
+	connection.query("select cita.*, usuario.Nombre, usuario.Apellido, usuario.Email, vehiculo.Modelo, vehiculo.Placa, vehiculo.Year as Año, vehiculo.Estado as 'Estado Vehiculo' from cita inner join usuario on cita.idUsuario = usuario.idUsuario inner join vehiculo on vehiculo.idVehiculo = cita.idVehiculo where cita.Estado = 'Solicitada';")
+	.then(json =>{
+		res.send(json);
+	}
+
+)}
+
+
+catch(err){
+
+	res.json({success : false, msg : "Error en el query"});
+
+}
+
+
+});
+
+
+router.get('/asignadas-citas', (req, res, next) =>{
+
+try{
+
+	connection.query("select cita.idCita, cita.Estado as 'Estado Cita', cita.idVehiculo, usuario.Nombre, usuario.Apellido, usuario.Email, vehiculo.Modelo, vehiculo.Placa, vehiculo.Year as Año, vehiculo.Estado as 'Estado Vehiculo' from cita inner join usuario on cita.idUsuario = usuario.idUsuario inner join vehiculo on vehiculo.idVehiculo = cita.idVehiculo where cita.Estado = 'Asignada';")
 	.then(json =>{
 		res.send(json);
 	}
@@ -592,7 +639,32 @@ router.post('/register-rep', (req, res, next) =>{
 		res.json({success : false, msg : "Error en el query"});
 	}
 
-})
+});
+
+router.post('/register-o', (req, res, next) =>{
+
+
+	try{
+		Orden.create({
+			Herramientas : req.body.herramientas,
+			sonido : req.body.sonido,
+			Accesorios : req.body.accesorios,
+			Llaves : req.body.llaves,
+			Desperfectos : req.body.carroceria,
+			Gato : req.body.gato,
+			Caucho : req.body.caucho,
+			idUsuario : req.body.idUsuario,
+			Vehiculo : req.body.idVehiculo
+		}).then(json =>{
+			res.json({success : true, msg : "Orden creada"});
+		})
+	}
+
+	catch(err){	
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+});
 
 
 

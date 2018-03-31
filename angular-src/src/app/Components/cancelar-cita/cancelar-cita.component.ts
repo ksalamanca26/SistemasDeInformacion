@@ -14,8 +14,7 @@ export class CancelarCitaComponent implements OnInit {
 
 	citas : any[];
 	selectedCita : any;
-  cliente : any;
-  vehiculo : any;
+  columnas : any[];
 
   constructor(private validateService : ValidateService,
   	private authService : AuthService,
@@ -24,44 +23,20 @@ export class CancelarCitaComponent implements OnInit {
 
   ngOnInit() {
 
+    this.columnas=["Modelo", "Placa", "Estado Cita"];
   	this.authService.loadUserData();
   	const user=this.authService.user;
   	this.authService.buscarCitas(user).subscribe(data=>{
   		if(data!=undefined){
-  			this.citas=data;
+  			this.citas=data[0];
   		}
   	});
   }
 
 
-  onSelect(){
-    if(!this.validateService.validateDetallesCita(this.selectedCita)){
-      toast("Por favor seleccione una cita",3000);
-      return false;
-    }
-
-    const user = {
-      idUsuario : this.selectedCita.idUsuario
-    }
-
-    this.authService.buscarUsuario(user).subscribe(data=>{
-      if(data){
-        this.cliente=data;
-      }
-    });
-
-
-    const carro = {
-      idVehiculo : this.selectedCita.idVehiculo
-    }
-
-    this.authService.buscarVehiculo(carro).subscribe(data=>{
-      if(data){
-        this.vehiculo=data;
-      }
-    })
-  }
-
+onClick(cita){
+  this.selectedCita=cita;
+}
 
   onDeleteSubmit(){
 
