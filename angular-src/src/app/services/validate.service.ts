@@ -170,4 +170,14 @@ validateRegisterOrden(orden){
 	}
 }
 
+validateUpdateOrden(orden){
+if(orden.Herramientas == '' || 	orden.Accesorios == '' || orden.Gato == '' || orden.Caucho == '' || orden.Desperfectos == '' || orden.Llaves == ''){
+		return false;
+	}
+
+	else{
+		return true;
+	}	
+}
+
 }

@@ -33,6 +33,7 @@ import { ModificarUsuarioComponent } from './Components/modificar-usuario/modifi
 import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {AuthService} from './services/auth.service';
+import { ModificarOrdenComponent } from './Components/modificar-orden/modificar-orden.component';
 
 
 
@@ -62,6 +63,8 @@ const appRoutes: Routes = [
   { path: 'cancelar-cita', component: CancelarCitaComponent },
   { path: 'registrar-adm', component: RegistrarAdmComponent },
   { path: 'modificar-usuario', component: ModificarUsuarioComponent },
+  { path: 'modificar-orden', component: ModificarOrdenComponent },
+
 ];
 
 @NgModule({
@@ -89,6 +92,7 @@ const appRoutes: Routes = [
     DashboardMecanicoComponent,
     DashboardGerenteComponent,
     ModificarUsuarioComponent,
+    ModificarOrdenComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,

@@ -63,6 +63,11 @@ export class GeneracionOrdenComponent implements OnInit {
       return false;
     }
 
+
+    const cita = {
+      idCita : this.selectedCita.idCita,
+      estado : "En progreso"
+    }
     const orden ={
       herramientas : this.herramientas,
       accesorios : this.accesorios,
@@ -80,6 +85,14 @@ export class GeneracionOrdenComponent implements OnInit {
       toast("Por favor rellene todos los campos", 3000);
       return false;
     }
+
+
+    this.authService.updateCitaOrden(cita).subscribe(data =>{
+      if(!data.success){
+        toast("Algo salió mal", 3000);
+        return false;
+      }
+    })
 
     this.authService.registerOrden(orden).subscribe(data =>{
       console.log("Y despues aca");

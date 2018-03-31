@@ -209,4 +209,25 @@ buscarUsuario(user){
    .map(res => res.json()); 
   }
 
+  ordenesMecanico(user){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/ordenes-m',user, {headers : headers})
+   .map(res => res.json());
+  }
+
+  updateOrden(orden){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/update-o',orden,{headers :headers})
+   .map(res => res.json()); 
+  }
+
+  updateCitaOrden(cita){
+     let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/update-c2',cita,{headers :headers})
+   .map(res => res.json()); 
+  }
+
 }

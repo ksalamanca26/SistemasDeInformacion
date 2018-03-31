@@ -15,44 +15,37 @@ return sequelize.define('orden', {
 	Herramientas : {
 
 		type : DataTypes.STRING,
-		allowNull : true
+		allowNull : false
 
 	},
-
-	Sonido : {
-
-		type : DataTypes.STRING,
-		allowNull : true
-	},
-
 
 	Accesorios : {
 
 		type : DataTypes.STRING,
-		allowNull : true
+		allowNull : false
 	},
 
 	Llaves : {
 
 		type : DataTypes.STRING,
-		allowNull : true
+		allowNull : false
 	},
 
 	Desperfectos : {
 
 		type : DataTypes.STRING,
-		allowNull : true
+		allowNull : false
 
 	},
 
 	Gato : {
 		type :DataTypes.STRING,
-		allowNull : true
+		allowNull : false
 	},
 
 	Caucho : {
 		type : DataTypes.STRING,
-		allowNull : true
+		allowNull : false
 	},
 
 	Foto : {

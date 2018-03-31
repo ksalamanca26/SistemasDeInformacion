@@ -43,7 +43,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','Asignada',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','Asignada',11,24);
+INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','En progreso',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','En progreso',11,24);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,13 +81,12 @@ DROP TABLE IF EXISTS `orden`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orden` (
   `idOrden` int(11) NOT NULL AUTO_INCREMENT,
-  `Herramientas` varchar(45) DEFAULT NULL,
-  `Sonido` varchar(45) DEFAULT NULL,
-  `Accesorios` varchar(45) DEFAULT NULL,
-  `Llaves` varchar(45) DEFAULT NULL,
-  `Desperfectos` varchar(45) DEFAULT NULL,
-  `Gato` varchar(45) DEFAULT NULL,
-  `Caucho` varchar(45) DEFAULT NULL,
+  `Herramientas` varchar(45) NOT NULL,
+  `Accesorios` varchar(45) NOT NULL,
+  `Llaves` varchar(45) NOT NULL,
+  `Desperfectos` varchar(45) NOT NULL,
+  `Gato` varchar(45) NOT NULL,
+  `Caucho` varchar(45) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `Vehiculo` int(11) NOT NULL,
   `Foto` mediumblob,
@@ -96,7 +95,7 @@ CREATE TABLE `orden` (
   KEY `vehiculo_idx` (`Vehiculo`),
   CONSTRAINT `usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `vehiculoFK` FOREIGN KEY (`Vehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,7 +104,7 @@ CREATE TABLE `orden` (
 
 LOCK TABLES `orden` WRITE;
 /*!40000 ALTER TABLE `orden` DISABLE KEYS */;
-INSERT INTO `orden` VALUES (1,'Con desperfectos',NULL,'Buenas condiciones','Buenas condiciones','No aplica','Buenas condiciones','Buenas condiciones',13,5,NULL);
+INSERT INTO `orden` VALUES (1,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Buenas condiciones','Buenas condiciones',13,5,NULL),(2,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Malas condiciones','Buenas condiciones',16,11,NULL);
 /*!40000 ALTER TABLE `orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,4 +259,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-30 21:38:24
+-- Dump completed on 2018-03-30 23:15:50
