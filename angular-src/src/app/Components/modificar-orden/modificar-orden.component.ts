@@ -29,7 +29,7 @@ export class ModificarOrdenComponent implements OnInit {
   	console.log(user);
 
 
-  	this.columnas=['idOrden', 'Nombre Mecanico', 'Apellido Mecanico', 'Modelo Vehiculo', 'Placa', 'Serial del Motor'];
+  	this.columnas=['idOrden', 'Estado', 'Nombre Mecanico', 'Apellido Mecanico', 'Modelo Vehiculo', 'Placa', 'Serial del Motor'];
 
   	this.authService.ordenesMecanico(user).subscribe(data =>{
   		if(data){
@@ -41,7 +41,14 @@ export class ModificarOrdenComponent implements OnInit {
 
 
   onClick(orden){
-  	this.selectedOrden = orden;
+    if(orden.Estado == "Cerrada"){
+      toast("Esta orden ya ha sido finalizada", 3000);
+      return false;
+    }
+    else{
+     this.selectedOrden = orden; 
+    }
+  	
   }
 
 

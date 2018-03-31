@@ -34,6 +34,9 @@ import {ValidateService} from './services/validate.service';
 import {FlashMessagesModule} from "angular2-flash-messages";
 import {AuthService} from './services/auth.service';
 import { ModificarOrdenComponent } from './Components/modificar-orden/modificar-orden.component';
+import {ExcelService} from './services/excel.service';
+import { FinalizarOrdenComponent } from './Components/finalizar-orden/finalizar-orden.component';
+
 
 
 
@@ -64,6 +67,7 @@ const appRoutes: Routes = [
   { path: 'registrar-adm', component: RegistrarAdmComponent },
   { path: 'modificar-usuario', component: ModificarUsuarioComponent },
   { path: 'modificar-orden', component: ModificarOrdenComponent },
+  { path: 'finalizar-orden', component: FinalizarOrdenComponent },
 
 ];
 
@@ -93,6 +97,7 @@ const appRoutes: Routes = [
     DashboardGerenteComponent,
     ModificarUsuarioComponent,
     ModificarOrdenComponent,
+    FinalizarOrdenComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,
@@ -104,7 +109,7 @@ const appRoutes: Routes = [
     MaterializeModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService],
+  providers: [ValidateService, AuthService, ExcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

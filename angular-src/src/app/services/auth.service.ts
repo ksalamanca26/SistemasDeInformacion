@@ -95,8 +95,10 @@ todosUsuarios(){
   .map(res => res.json());
 }
 
-  todosMecanicos(){
-      return this.http.get('http://localhost:8080/todos-mecanicos')
+  todosRol(user){
+     let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+      return this.http.post('http://localhost:8080/todos-rol', user, {headers : headers})
   .map(res => res.json());
   }
 
@@ -227,6 +229,23 @@ buscarUsuario(user){
      let headers = new Headers();
    headers.append('Content-Type', 'application/json');
    return  this.http.post('http://localhost:8080/update-c2',cita,{headers :headers})
+   .map(res => res.json()); 
+  }
+
+  todosVehiculos(){
+    return this.http.get('http://localhost:8080/todos-v')
+    .map(res => res.json());
+  }
+
+  todasOrdenes(){
+    return this.http.get('http://localhost:8080/todas-o')
+    .map(res => res.json());
+  }
+
+  cerrarOrden(orden){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/cerrar-o',orden,{headers :headers})
    .map(res => res.json()); 
   }
 

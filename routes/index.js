@@ -298,13 +298,13 @@ router.get('/todos-usuarios', (req, res, next) =>{
 
 });
 
-router.get('/todos-mecanicos', (req, res, next) =>{
+router.post('/todos-rol', (req, res, next) =>{
 
 	try{
 
 		Usuario.findAll({
 			where : {
-				Rol : 2
+				Rol : req.body.rol
 			}
 		}).then(json =>{
 
@@ -652,8 +652,10 @@ router.post('/register-o', (req, res, next) =>{
 			Desperfectos : req.body.carroceria,
 			Gato : req.body.gato,
 			Caucho : req.body.caucho,
+			Estado : 'Abierta',
 			idUsuario : req.body.idUsuario,
-			Vehiculo : req.body.idVehiculo
+			Vehiculo : req.body.idVehiculo,
+			idCita : req.body.idCita
 		}).then(json =>{
 			res.json({success : true, msg : "Orden creada"});
 		})
@@ -670,7 +672,7 @@ router.post('/ordenes-m', (req, res, next) =>{
 
 
 	try{
-		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo where orden.idUsuario = "+req.body.id)
+		connection.query("select orden.idOrden, orden.Estado, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado as 'Estado Orden', usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo where orden.idUsuario = "+req.body.id)
 		.then(json=>{
 			res.send(json);
 		})
@@ -724,7 +726,52 @@ router.post('/update-c2', (req, res, next) =>{
 		res.json({success : false, msg : "Error en el query"});
 	}
 
+});
+
+router.get('/todos-v', (req, res, next) =>{
+	try{
+		Vehiculo.findAll().then(json=>{
+			res.send(json);
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+});
+
+router.get('/todas-o', (req, res, next) =>{
+	try{
+		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado, orden.idCita, usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo")
+		.then(json=>{
+			res.send(json);
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+});
+
+
+router.post('/cerrar-o', (req, res, next) =>{
+	try{
+		Orden.update({
+			Estado : req.body.estado
+		}, {
+			where : {
+				idOrden : req.body.idOrden
+			}
+		}).then(json =>{
+			res.json({success : true, msg : "Orden finalizada"});
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
 })
+
 
 
 module.exports= router;

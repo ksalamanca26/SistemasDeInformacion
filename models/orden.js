@@ -48,6 +48,11 @@ return sequelize.define('orden', {
 		allowNull : false
 	},
 
+	Estado : {
+		type : DataTypes.STRING,
+		allowNull : false
+	},
+
 	Foto : {
 		type : DataTypes.STRING,
 		allowNull : true
@@ -59,6 +64,11 @@ return sequelize.define('orden', {
 	},
 
 	Vehiculo : {
+		type : DataTypes.INTEGER,
+		allowNull : false
+	},
+
+	idCita : {
 		type : DataTypes.INTEGER,
 		allowNull : false
 	}

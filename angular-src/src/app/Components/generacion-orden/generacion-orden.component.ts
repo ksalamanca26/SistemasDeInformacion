@@ -36,6 +36,9 @@ export class GeneracionOrdenComponent implements OnInit {
 
   ngOnInit() {
 
+    const user = {
+      rol : 2
+    }
     this.columnas=['Nombre', 'Apellido', 'Email', 'Modelo', 'Placa', 'Año', 'Estado Vehiculo', 'Estado Cita'];
   	this.authService.citasAsignadas().subscribe(data=>{
   		if(data!=undefined){
@@ -43,7 +46,7 @@ export class GeneracionOrdenComponent implements OnInit {
   		}
   	});
 
-    this.authService.todosMecanicos().subscribe(data=>{
+    this.authService.todosRol(user).subscribe(data=>{
       if(data){
         this.mecanicos=data;
       }
@@ -77,7 +80,8 @@ export class GeneracionOrdenComponent implements OnInit {
       sonido : this.sonido,
       carroceria : this.carroceria,
       idVehiculo : this.selectedCita.idVehiculo,
-      idUsuario : this.selectedMecanico.idUsuario
+      idUsuario : this.selectedMecanico.idUsuario,
+      idCita : this.selectedCita.idCita
     }
 
     if(!this.validateService.validateRegisterOrden(orden)){

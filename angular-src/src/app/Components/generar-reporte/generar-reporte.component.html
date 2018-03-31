@@ -1,19 +1,78 @@
 <div class="container">
 <h1>Generar Reporte</h1>
-<label>Seleccione el tipo de reporte</label>
-  <select class="browser-default">
+
+<div class="row"><label>Seleccione el tipo de reporte</label>
+  <select [(ngModel)]="opcion" class="browser-default">
     <option value="" disabled selected>Choose your option</option>
     <option value="1">Historial Cliente</option>
     <option value="2">Órdenes por Mecanico</option>
     <option value="3">Servicios por Vehículo</option>
     <option value="4">Cantidad de Vehículos Atendidos por Modelo</option>
-  </select>
-  <button type="submit" class="btn btn-primary">Generar Reporte</button>
+  </select></div>
+
+
+  <div *ngIf="opcion==1">
+   <table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnasCliente">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td *ngFor="let col of columnasCliente" >{{cliente[col]}}</td>
+            Descargar Reporte <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onCliente(cliente)"><i class="material-icons">file_download</i></a>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+  <div *ngIf="opcion==2">
+ <table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnasMecanico">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let mecanico of mecanicos">
+            <td *ngFor="let col of columnasMecanico" >{{mecanico[col]}}</td>
+            Descargar Reporte <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onMecanico(mecanico)"><i class="material-icons">file_download</i></a>
+          </tr>
+        </tbody>
+      </table>  
+  </div>
+
+  <div *ngIf="opcion==3">
+
+    <table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnasVehiculo">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let vehiculo of vehiculos">
+            <td *ngFor="let col of columnasVehiculo" >{{vehiculo[col]}}</td>
+            Descargar Reporte <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onServicios(vehiculo)"><i class="material-icons">file_download</i></a>
+          </tr>
+        </tbody>
+      </table>  
+  </div>
+
   
 </div>
-
-<h1 class="text transparent">. </h1>
-<h1 class="text transparent">. </h1>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <footer class="page-footer black">
     <div class="container">

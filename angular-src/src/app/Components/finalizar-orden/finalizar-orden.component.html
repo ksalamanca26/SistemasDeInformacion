@@ -10,66 +10,51 @@
         <tbody>
           <tr *ngFor="let orden of ordenes">
             <td *ngFor="let col of columnas" >{{orden[col]}}</td>
-            <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(orden)"><i class="material-icons">edit</i></a>
+            Finalizar Orden <a class="btn-floating btn-tiny waves-effect waves-light red" (click)="onClick(orden)"><i class="material-icons">check</i></a>
           </tr>
         </tbody>
       </table>
 
-<div *ngIf="selectedOrden">
+    </div>
 
-   <form (submit)= "onSubmit()" class="col s12">
-      <div class="row">
+  <h1></h1>    
+
+  <div *ngIf="selectedOrden"><div class="row">
         <div class="col s6"> <label for="accesorios">Accesorios Encontrados</label>
-          <input [(ngModel)]= "selectedOrden.Accesorios" name="accesorios" id="accesorios" placeholder="accesorios" type="text" class="validate">
+          <input [(ngModel)]= "selectedOrden.Accesorios" name="accesorios" id="accesorios" placeholder="Accesorios" type="text" class="validate" disabled>
          
         </div>
         <div class="col s6"> <label for="caucho">Caucho de Repuesto</label>
-          <input [(ngModel)]= "selectedOrden.Caucho" name="caucho" id="caucho" placeholder="caucho" type="text" class="validate">
+          <input [(ngModel)]= "selectedOrden.Caucho" name="caucho" id="caucho" placeholder="Caucho" type="text" class="validate" disabled>
          
         </div>
       </div>
       <div class="row">
         <div class="col s6"><label for="llaves">Llaves</label>
-          <input [(ngModel)]= "selectedOrden.Llaves" name="llaves" id="llaves" placeholder="llaves" type="text" class="validate">
+          <input [(ngModel)]= "selectedOrden.Llaves" name="llaves" id="llaves" placeholder="Llaves" type="text" class="validate" disabled>
           
         </div>
         <div class="col s6">    <label for="gato">Gato</label>
-          <input [(ngModel)]= "selectedOrden.Gato" name="gato" id="gato" placeholder="gato" type="text" class="validate">
+          <input [(ngModel)]= "selectedOrden.Gato" name="gato" id="gato" placeholder="Gato" type="text" class="validate" disabled>
       
         </div>
       </div>
       <div class="row">
         <div class="col s6"><label for="herramientas">Herramientas</label>
-          <input [(ngModel)]= "selectedOrden.Herramientas" name="herramientas" id="herramientas" placeholder="herramientas" type="text" class="validate">
+          <input [(ngModel)]= "selectedOrden.Herramientas" name="herramientas" id="herramientas" placeholder="Herramientas" type="text" class="validate" disabled>
           
         </div>
     <div class="col s6"><label for="carroceria">Desperfecto en la Carrocería</label>
-          <input [(ngModel)]= "selectedOrden.Desperfectos" name="carroceria" id="carroceria" placeholder="carroceria" type="text" class="validate">
+          <input [(ngModel)]= "selectedOrden.Desperfectos" name="carroceria" id="carroceria" placeholder="Carroceria" type="text" class="validate" disabled>
           
         </div>
       </div>
 
 
-    <div class="row">
-            <div class="file-field input-field col s12 m12 l12">
-              <div class="btn waves-effect waves-light">
-                <span>File</span>
-                <input type="file" accept=".png, .jpg, .jpeg" name="Foto"/>
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" required [(ngModel)]="foto" name="foto">
-              </div>
-            </div>
-          </div>
-       <button type="submit" class="btn btn-primary">Listo</button>
-    </form>        
-</div>
-
-
+       <button (click)="onSubmit()" class="btn btn-primary">Finalizar Orden</button></div>
   
-    </div>
+<h1></h1>
 
-  <h1></h1>    
 <br>
 <br>
 <br>
@@ -77,6 +62,8 @@
 <br>
 <br>
 <br>
+<br>
+
 
     <footer class="page-footer black">
         <div class="container">

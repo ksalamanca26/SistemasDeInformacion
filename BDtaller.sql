@@ -34,7 +34,7 @@ CREATE TABLE `cita` (
   KEY `idvehiculo_idx` (`idVehiculo`),
   CONSTRAINT `idusuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idvehiculo` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','En progreso',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','En progreso',11,24);
+INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','Finalizada',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','Finalizada',11,24),(10,'12:00 pm','2018-04-05','Finalizada',12,23);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,15 +87,19 @@ CREATE TABLE `orden` (
   `Desperfectos` varchar(45) NOT NULL,
   `Gato` varchar(45) NOT NULL,
   `Caucho` varchar(45) NOT NULL,
+  `Estado` varchar(45) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `Vehiculo` int(11) NOT NULL,
+  `idCita` int(11) NOT NULL,
   `Foto` mediumblob,
   PRIMARY KEY (`idOrden`),
   KEY `idusuario_idx` (`idUsuario`),
   KEY `vehiculo_idx` (`Vehiculo`),
+  KEY `cita_idx` (`idCita`),
+  CONSTRAINT `cita` FOREIGN KEY (`idCita`) REFERENCES `cita` (`idCita`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `vehiculoFK` FOREIGN KEY (`Vehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +108,7 @@ CREATE TABLE `orden` (
 
 LOCK TABLES `orden` WRITE;
 /*!40000 ALTER TABLE `orden` DISABLE KEYS */;
-INSERT INTO `orden` VALUES (1,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Buenas condiciones','Buenas condiciones',13,5,NULL),(2,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Malas condiciones','Buenas condiciones',16,11,NULL);
+INSERT INTO `orden` VALUES (3,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Buenas condiciones','Buenas condiciones','Cerrada',16,10,6,NULL),(4,'Con desperfectos','Buenas condiciones','Malas condiciones','No aplica','Malas condiciones','Buenas condiciones','Cerrada',16,11,9,NULL),(5,'Buenas Condiciones','Buenas condiciones','Malas condiciones','Con Desperfectos','Malas condiciones','Con Desperfectos','Cerrada',16,12,10,NULL);
 /*!40000 ALTER TABLE `orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,7 +215,7 @@ CREATE TABLE `vehiculo` (
   UNIQUE KEY `Placa_UNIQUE` (`Placa`),
   KEY `usuario_tiene_vehiculo_idx` (`idUsuario`),
   CONSTRAINT `usuario_tiene_vehiculo` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -220,7 +224,7 @@ CREATE TABLE `vehiculo` (
 
 LOCK TABLES `vehiculo` WRITE;
 /*!40000 ALTER TABLE `vehiculo` DISABLE KEYS */;
-INSERT INTO `vehiculo` VALUES (5,'EMNKR420R5U0273','2018-02-22','L4A-O32','Lamborghini Aventador LP700-4',2012,'Desactivado',14),(6,'EMN6300R5U0273','2018-03-09','J21-KL2','Tesla Model 3',2018,'Activo',12),(7,'ETK945WISM41WR','2018-03-10','NN4-IL1','Toyota Corolla',2006,'Activo',14),(9,'EMNKR420R5U0273','2018-03-11','MAP-90Q','Mazda 7',2009,'Activo',16),(10,'EMN6300R5U0IR21','2018-03-29','H25-MP4','Mazda 7',2010,'Activo',23),(11,'ET6736F2661FJSK3','2018-03-30','GBI-30V','Toyota 4Runner',2000,'Activo',24);
+INSERT INTO `vehiculo` VALUES (5,'EMNKR420R5U0273','2018-02-22','L4A-O32','Lamborghini Aventador LP700-4',2012,'Desactivado',14),(6,'EMN6300R5U0273','2018-03-09','J21-KL2','Tesla Model 3',2018,'Activo',12),(7,'ETK945WISM41WR','2018-03-10','NN4-IL1','Toyota Corolla',2006,'Activo',14),(9,'EMNKR420R5U0273','2018-03-11','MAP-90Q','Mazda 7',2009,'Activo',16),(10,'EMN6300R5U0IR21','2018-03-29','H25-MP4','Mazda 7',2010,'Activo',23),(11,'ET6736F2661FJSK3','2018-03-30','GBI-30V','Toyota 4Runner',2000,'Activo',24),(12,'IDAORSIEAR93WRW','2018-03-31','KEV-26S','Bugatti Veyron',2017,'Activo',23);
 /*!40000 ALTER TABLE `vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -259,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-30 23:15:50
+-- Dump completed on 2018-03-31 19:36:06
