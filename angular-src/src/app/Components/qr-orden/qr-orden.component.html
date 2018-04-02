@@ -1,0 +1,55 @@
+<div class="container">
+<h1>Detalles Orden</h1>
+<table class="responsive-table">
+        <thead>
+          <tr>
+              <th *ngFor="let col of columnas">{{col}}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let orden of ordenes">
+            <td *ngFor="let col of columnas" >{{orden[col]}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  <h1></h1>    
+ 
+  
+<h1></h1>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+    <footer class="page-footer black">
+        <div class="container">
+          <div class="row">
+            <div class="col l6 s12">
+              <h5 class="white-text">Mecamet C.A</h5>
+              <p class="grey-text text-lighten-4">Todos los derechos reservados.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+              
+              <ul>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          © 2018 Copyright Text
+          <a class="grey-text text-lighten-4 right" href="#!"></a>
+          </div>
+        </div>
+      </footer>

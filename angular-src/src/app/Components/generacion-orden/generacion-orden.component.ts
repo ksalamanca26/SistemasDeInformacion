@@ -27,6 +27,7 @@ export class GeneracionOrdenComponent implements OnInit {
 
   columnas : any[];
 
+  qr : any;
 	
 
   constructor(private authService : AuthService,
@@ -101,8 +102,21 @@ export class GeneracionOrdenComponent implements OnInit {
     this.authService.registerOrden(orden).subscribe(data =>{
       console.log("Y despues aca");
       if(data.success){
-        toast(data.msg, 3000);
+        
+        const qr = {
+          url : " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:4200/qr-orden?orden="+data.idOrden,
+          email : this.selectedCita.Email
+        }
+
+        this.authService.emailQR(qr).subscribe(data2=>{
+
+          if(data2.success){
+             toast(data2.msg, 3000);
         this.router.navigate(['dashboard-gerente']);
+          }
+            
+        });
+     
       }
 
       else{

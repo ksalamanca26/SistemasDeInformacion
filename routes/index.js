@@ -500,11 +500,12 @@ router.post('/update-c', (req, res, next) =>{
 			idCita : req.body.idCita
 		}
 	}).then(json=>{
+		console.log(req.body.email);
 			var mailOptions = {
   			from: 'mecametca@gmail.com',
   			to: req.body.email,
  			subject: 'Cita asignada',
-  			text: 'Estimado usuario, se le ha asignado una cita para el '+ req.body.fecha+' a las '+req.body.hora+' .'
+  			html: '<h1>Estimado usuario,<h1> <div class="row"><se le ha asignado una cita para el '+ req.body.fecha+' a las '+req.body.hora+' . </div>'
 };
 
 transporter.sendMail(mailOptions, function(error, info){
@@ -657,7 +658,7 @@ router.post('/register-o', (req, res, next) =>{
 			Vehiculo : req.body.idVehiculo,
 			idCita : req.body.idCita
 		}).then(json =>{
-			res.json({success : true, msg : "Orden creada"});
+			res.json({success : true, msg : "Orden creada", idOrden : json.dataValues.idOrden});
 		})
 	}
 
@@ -770,7 +771,55 @@ router.post('/cerrar-o', (req, res, next) =>{
 	catch(err){
 		res.json({success : false, msg : "Error en el query"});
 	}
+});
+
+
+router.post('/qr-orden', (req, res, next) =>{
+	try{
+		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado as 'Estado Orden', orden.idCita, cita.Estado as 'Estado Cita', usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo inner join cita on orden.idCita = cita.idCita where orden.idOrden = "+req.body.idOrden)
+		.then(json=>{
+			res.send(json);
+		})
+	}
+
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+
+});
+
+
+router.post('/email-qr', (req, res, next) =>{
+
+
+	try{
+
+		var mailOptions = {
+  			from: 'mecametca@gmail.com',
+  			to: req.body.email,
+ 			subject: 'Vehículo admitido',
+ 			html : '<h1> Vehículo Admitido </h1> <div class ="row"> Estimado usuario, su vehículo ha sido admitido. Puede escanear el código QR adjunto para ver detalles del servicio </div> <br> <div class="row"> <img src="'+req.body.url+'"> </div>'
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+    res.json({success : true, msg : "Orden creada"});
+  }
+});
+	}
+
+
+	catch(err){
+
+	}
+
+
 })
+
 
 
 

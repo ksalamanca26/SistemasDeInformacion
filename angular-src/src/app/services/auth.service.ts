@@ -249,4 +249,18 @@ buscarUsuario(user){
    .map(res => res.json()); 
   }
 
+  qrOrden(orden){
+        let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/qr-orden',orden,{headers :headers})
+   .map(res => res.json()); 
+  }
+
+  emailQR(qr){
+    let headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   return  this.http.post('http://localhost:8080/email-qr',qr,{headers :headers})
+   .map(res => res.json()); 
+  }
+
 }

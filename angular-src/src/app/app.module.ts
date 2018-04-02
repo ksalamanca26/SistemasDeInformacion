@@ -36,6 +36,8 @@ import {AuthService} from './services/auth.service';
 import { ModificarOrdenComponent } from './Components/modificar-orden/modificar-orden.component';
 import {ExcelService} from './services/excel.service';
 import { FinalizarOrdenComponent } from './Components/finalizar-orden/finalizar-orden.component';
+import {NgxQRCodeModule } from 'ngx-qrcode2';
+import { QrOrdenComponent } from './Components/qr-orden/qr-orden.component';
 
 
 
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
   { path: 'modificar-usuario', component: ModificarUsuarioComponent },
   { path: 'modificar-orden', component: ModificarOrdenComponent },
   { path: 'finalizar-orden', component: FinalizarOrdenComponent },
+  { path: 'qr-orden', component: QrOrdenComponent },
 
 ];
 
@@ -98,6 +101,7 @@ const appRoutes: Routes = [
     ModificarUsuarioComponent,
     ModificarOrdenComponent,
     FinalizarOrdenComponent,
+    QrOrdenComponent,
   ],
   imports: [RouterModule.forRoot(
       appRoutes,
@@ -107,7 +111,8 @@ const appRoutes: Routes = [
     HttpModule,
     BrowserModule,
     MaterializeModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    NgxQRCodeModule
   ],
   providers: [ValidateService, AuthService, ExcelService],
   bootstrap: [AppComponent]

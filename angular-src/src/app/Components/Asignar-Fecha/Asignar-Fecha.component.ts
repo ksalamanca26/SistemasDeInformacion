@@ -18,6 +18,7 @@ export class AsignarFechaComponent implements OnInit {
 
   columnas : any[];
 
+
   constructor(private authService : AuthService,
   	private validateService : ValidateService,
   	private flashMessage : FlashMessagesService,
