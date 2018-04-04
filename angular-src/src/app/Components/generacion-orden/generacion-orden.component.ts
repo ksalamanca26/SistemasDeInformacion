@@ -60,12 +60,23 @@ export class GeneracionOrdenComponent implements OnInit {
     this.selectedCita=cita;
   }
 
+
+  onChange(evt : EventTarget){
+    console.log(evt);
+    this.authService.loadImage2Base64(evt).then((algo)=> {
+      this.foto = algo;
+    }).catch((err)=> console.log(err));
+
+  }
+
   onSubmit(){
 
     if(this.selectedMecanico==undefined){
       toast("Por favor seleccione un mecánico", 3000);
       return false;
     }
+
+    console.log(this.foto);
 
 
     const cita = {
@@ -80,6 +91,7 @@ export class GeneracionOrdenComponent implements OnInit {
       gato : this.gato,
       sonido : this.sonido,
       carroceria : this.carroceria,
+      foto : this.foto,
       idVehiculo : this.selectedCita.idVehiculo,
       idUsuario : this.selectedMecanico.idUsuario,
       idCita : this.selectedCita.idCita
@@ -104,7 +116,7 @@ export class GeneracionOrdenComponent implements OnInit {
       if(data.success){
         
         const qr = {
-          url : " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:4200/qr-orden?orden="+data.idOrden,
+          url : " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mecamet.herokuapp.com/qr-orden?orden="+data.idOrden,
           email : this.selectedCita.Email
         }
 

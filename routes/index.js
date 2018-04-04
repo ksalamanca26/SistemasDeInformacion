@@ -8,7 +8,7 @@ const sequelize= require('sequelize');
 var connection;
 
 
-connection = new sequelize("taller", "root", "password", {
+connection = new Sequelize(process.env.JAWSDB_URL, {
 
   dialect : 'mysql',
 
@@ -18,7 +18,7 @@ connection = new sequelize("taller", "root", "password", {
      timestamps : false
   }
 
-});
+})
 
 
 var transporter = nodemailer.createTransport({
@@ -654,6 +654,7 @@ router.post('/register-o', (req, res, next) =>{
 			Gato : req.body.gato,
 			Caucho : req.body.caucho,
 			Estado : 'Abierta',
+			Foto : req.body.foto,
 			idUsuario : req.body.idUsuario,
 			Vehiculo : req.body.idVehiculo,
 			idCita : req.body.idCita

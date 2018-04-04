@@ -34,7 +34,7 @@ CREATE TABLE `cita` (
   KEY `idvehiculo_idx` (`idVehiculo`),
   CONSTRAINT `idusuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `idvehiculo` FOREIGN KEY (`idVehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','Finalizada',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','Finalizada',11,24),(10,'12:00 pm','2018-04-05','Finalizada',12,23);
+INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','Finalizada',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','Finalizada',11,24),(10,'12:00 pm','2018-04-05','Finalizada',12,23),(11,'2:00 pm','2018-04-10','En progreso',10,23),(12,'4:00 pm','2018-04-13','Asignada',12,23);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +99,7 @@ CREATE TABLE `orden` (
   CONSTRAINT `cita` FOREIGN KEY (`idCita`) REFERENCES `cita` (`idCita`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `vehiculoFK` FOREIGN KEY (`Vehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `orden` (
 
 LOCK TABLES `orden` WRITE;
 /*!40000 ALTER TABLE `orden` DISABLE KEYS */;
-INSERT INTO `orden` VALUES (3,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Buenas condiciones','Buenas condiciones','Cerrada',16,10,6,NULL),(4,'Con desperfectos','Buenas condiciones','Malas condiciones','No aplica','Malas condiciones','Buenas condiciones','Cerrada',16,11,9,NULL),(5,'Buenas Condiciones','Buenas condiciones','Malas condiciones','Con Desperfectos','Malas condiciones','Con Desperfectos','Cerrada',16,12,10,NULL);
+INSERT INTO `orden` VALUES (3,'Con desperfectos','Buenas condiciones','Buenas condiciones','No aplica','Buenas condiciones','Buenas condiciones','Cerrada',16,10,6,NULL),(4,'Con desperfectos','Buenas condiciones','Malas condiciones','No aplica','Malas condiciones','Buenas condiciones','Cerrada',16,11,9,NULL),(5,'Buenas Condiciones','Buenas condiciones','Malas condiciones','Con Desperfectos','Malas condiciones','Con Desperfectos','Cerrada',16,12,10,NULL),(6,'Con desperfectos','Buenas condiciones','Malas condiciones','No aplica','Buenas condiciones','Buenas condiciones','Abierta',13,7,8,NULL),(9,'Buenas Condiciones','Buenas condiciones','Buenas condiciones','Con Desperfectos','Buenas condiciones','Con Desperfectos','Abierta',13,10,11,NULL);
 /*!40000 ALTER TABLE `orden` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-31 19:36:06
+-- Dump completed on 2018-04-04 18:23:17
