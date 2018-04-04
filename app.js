@@ -23,11 +23,8 @@ app.use(passport.session());
 
 app.use('/', routes);
 
-app.get('/', function(req, res){
-	res.send('Invalid endpoint');
-})
 
-app.get('*', function(req, res){
+app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'angular-src/dist/index.html'));
 })
 
