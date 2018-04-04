@@ -17,6 +17,8 @@ export class RegistroVehiculoComponent implements OnInit {
 	placa : String;
 	year : number;
 
+  foto : File;
+
 
   constructor(private validateService : ValidateService,
   	private authService : AuthService,
@@ -29,7 +31,7 @@ export class RegistroVehiculoComponent implements OnInit {
 
   onRegisterSubmit(){
 
-
+console.log(this.foto);
   	const user=JSON.parse(localStorage.getItem('user'));
  	
 

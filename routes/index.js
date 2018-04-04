@@ -505,7 +505,7 @@ router.post('/update-c', (req, res, next) =>{
   			from: 'mecametca@gmail.com',
   			to: req.body.email,
  			subject: 'Cita asignada',
-  			html: '<h1>Estimado usuario,<h1> <div class="row"><se le ha asignado una cita para el '+ req.body.fecha+' a las '+req.body.hora+' . </div>'
+  			html: '<h1>Estimado usuario,</h1> <div class="row">se le ha asignado una cita para el '+ req.body.fecha+' a las '+req.body.hora+' . </div>'
 };
 
 transporter.sendMail(mailOptions, function(error, info){
