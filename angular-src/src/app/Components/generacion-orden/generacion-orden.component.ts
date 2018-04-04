@@ -61,14 +61,6 @@ export class GeneracionOrdenComponent implements OnInit {
   }
 
 
-  onChange(evt : EventTarget){
-    console.log(evt);
-    this.authService.loadImage2Base64(evt).then((algo)=> {
-      this.foto = algo;
-    }).catch((err)=> console.log(err));
-
-  }
-
   onSubmit(){
 
     if(this.selectedMecanico==undefined){
