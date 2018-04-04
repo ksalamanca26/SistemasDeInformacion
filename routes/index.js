@@ -7,8 +7,8 @@ const bcrypt = require('bcryptjs');
 const sequelize= require('sequelize');
 var connection;
 
-
-connection = new Sequelize(process.env.JAWSDB_URL, {
+if(process.env.JAWSDB_URL){
+connection = new sequelize(process.env.JAWSDB_URL, {
 
   dialect : 'mysql',
 
@@ -18,7 +18,24 @@ connection = new Sequelize(process.env.JAWSDB_URL, {
      timestamps : false
   }
 
-})
+});
+}
+
+else{
+connection = new sequelize("taller", "root", "password", {
+
+  dialect : 'mysql',
+
+  define : {
+
+     freezeTableName : true,
+     timestamps : false
+  }
+
+})	
+}
+
+
 
 
 var transporter = nodemailer.createTransport({
