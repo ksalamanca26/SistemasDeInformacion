@@ -23,6 +23,10 @@ app.use(passport.session());
 
 app.use('/', routes);
 
+app.get('/', function(req, res){
+	res.send('Invalid endpoint');
+})
+
 app.listen(port, then =>{
 
 	console.log("Listening...")
