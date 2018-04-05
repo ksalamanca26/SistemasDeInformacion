@@ -22,6 +22,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
+app.get('/', (req, res) => {
+  res.send('Invalid Endpoint');
+});
 
 app.listen(port, then =>{
 
