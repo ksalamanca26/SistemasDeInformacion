@@ -18,6 +18,8 @@ export class QrOrdenComponent implements OnInit {
 
 	columnas : any[];
 
+  url : any;
+
   constructor(private authService : AuthService,
   	private validateService : ValidateService,
   	private flashMessage : FlashMessagesService,
@@ -38,6 +40,7 @@ export class QrOrdenComponent implements OnInit {
   		if(data){
   			console.log(data);
   			this.ordenes=data[0];
+        this.url=this.ordenes[0].Foto;
   		}
 
   		else{

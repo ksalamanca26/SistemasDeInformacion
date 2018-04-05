@@ -15,7 +15,6 @@ export class FinalizarOrdenComponent implements OnInit {
 
 	ordenes : any[];
 	selectedOrden : any;
-
 	columnas : any[];
 
   constructor(private authService : AuthService,

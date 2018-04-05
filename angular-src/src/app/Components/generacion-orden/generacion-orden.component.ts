@@ -16,6 +16,7 @@ export class GeneracionOrdenComponent implements OnInit {
   mecanicos : any[];
   selectedMecanico : any;
   foto : any;
+  linkFoto :any;
 
   herramientas : any;
   accesorios : any;
@@ -61,6 +62,13 @@ export class GeneracionOrdenComponent implements OnInit {
   }
 
 
+ onChange(evt){
+    this.authService.loadImg(evt.target.files[0]).then(link => {
+      this.linkFoto = link;
+      console.log(this.linkFoto);
+    }).catch(err => console.log(err));
+ }
+
   onSubmit(){
 
     if(this.selectedMecanico==undefined){
@@ -68,7 +76,6 @@ export class GeneracionOrdenComponent implements OnInit {
       return false;
     }
 
-    console.log(this.foto);
 
 
     const cita = {
@@ -83,10 +90,10 @@ export class GeneracionOrdenComponent implements OnInit {
       gato : this.gato,
       sonido : this.sonido,
       carroceria : this.carroceria,
-      foto : this.foto,
       idVehiculo : this.selectedCita.idVehiculo,
       idUsuario : this.selectedMecanico.idUsuario,
-      idCita : this.selectedCita.idCita
+      idCita : this.selectedCita.idCita,
+      linkFoto : this.linkFoto
     }
 
     if(!this.validateService.validateRegisterOrden(orden)){
@@ -108,7 +115,7 @@ export class GeneracionOrdenComponent implements OnInit {
       if(data.success){
         
         const qr = {
-          url : " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mecamet.herokuapp.com/qr-orden?orden="+data.idOrden,
+          url : " https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://localhost:4200/qr-orden?orden="+data.idOrden,
           email : this.selectedCita.Email
         }
 

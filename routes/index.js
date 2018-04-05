@@ -4,24 +4,11 @@ const path = require('path');
 const fs =require('fs');
 const nodemailer= require('nodemailer');
 const bcrypt = require('bcryptjs');
+const cloudinary = require('cloudinary');
 const sequelize= require('sequelize');
 var connection;
 
-if(process.env.JAWSDB_URL){
-connection = new sequelize(process.env.JAWSDB_URL, {
 
-  dialect : 'mysql',
-
-  define : {
-
-     freezeTableName : true,
-     timestamps : false
-  }
-
-});
-}
-
-else{
 connection = new sequelize("taller", "root", "password", {
 
   dialect : 'mysql',
@@ -32,10 +19,7 @@ connection = new sequelize("taller", "root", "password", {
      timestamps : false
   }
 
-})	
-}
-
-
+});
 
 
 var transporter = nodemailer.createTransport({
@@ -44,6 +28,12 @@ var transporter = nodemailer.createTransport({
     user: 'mecametca@gmail.com',
     pass: 'mecamet123'
   }
+});
+
+cloudinary.config({ 
+  cloud_name: 'mecamet', 
+  api_key: '531842521646135', 
+  api_secret: 'RZ_e5VKT86IaXGpRPM57lYussKI' 
 });
 
 var Usuario = connection.import('../models/usuario');
@@ -89,7 +79,6 @@ catch(err){
 
 
 });
-
 
 
 router.post('/authenticate', (req, res, next) => {
@@ -662,9 +651,14 @@ router.post('/register-rep', (req, res, next) =>{
 
 router.post('/register-o', (req, res, next) =>{
 
-
+	var URL;
 	try{
-		Orden.create({
+
+		cloudinary.uploader.upload(req.body.linkFoto, result =>{
+			if(result){
+				URL = result.secure_url
+				console.log(URL);
+				Orden.create({
 			Herramientas : req.body.herramientas,
 			Accesorios : req.body.accesorios,
 			Llaves : req.body.llaves,
@@ -672,13 +666,17 @@ router.post('/register-o', (req, res, next) =>{
 			Gato : req.body.gato,
 			Caucho : req.body.caucho,
 			Estado : 'Abierta',
-			Foto : req.body.foto,
+			Foto : result.secure_url,
 			idUsuario : req.body.idUsuario,
 			Vehiculo : req.body.idVehiculo,
 			idCita : req.body.idCita
 		}).then(json =>{
 			res.json({success : true, msg : "Orden creada", idOrden : json.dataValues.idOrden});
 		})
+			}
+		})
+
+		
 	}
 
 	catch(err){	
@@ -692,7 +690,7 @@ router.post('/ordenes-m', (req, res, next) =>{
 
 
 	try{
-		connection.query("select orden.idOrden, orden.Estado, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado as 'Estado Orden', usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo where orden.idUsuario = "+req.body.id)
+		connection.query("select orden.idOrden, orden.Estado, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado as 'Estado Orden', orden.Foto, usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo where orden.idUsuario = "+req.body.id)
 		.then(json=>{
 			res.send(json);
 		})
@@ -762,7 +760,7 @@ router.get('/todos-v', (req, res, next) =>{
 
 router.get('/todas-o', (req, res, next) =>{
 	try{
-		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado, orden.idCita, usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo")
+		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado, orden.idCita, orden.Foto, usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo")
 		.then(json=>{
 			res.send(json);
 		})
@@ -795,7 +793,7 @@ router.post('/cerrar-o', (req, res, next) =>{
 
 router.post('/qr-orden', (req, res, next) =>{
 	try{
-		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado as 'Estado Orden', orden.idCita, cita.Estado as 'Estado Cita', usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo inner join cita on orden.idCita = cita.idCita where orden.idOrden = "+req.body.idOrden)
+		connection.query("select orden.idOrden, orden.Herramientas, orden.Accesorios, orden.Gato, orden.Caucho, orden.Desperfectos, orden.Llaves, orden.Estado as 'Estado Orden', orden.idCita, cita.Estado as 'Estado Cita', orden.Foto, usuario.Nombre as 'Nombre Mecanico', usuario.Apellido as 'Apellido Mecanico', vehiculo.Modelo as 'Modelo Vehiculo', vehiculo.Placa, vehiculo.Serial as 'Serial del Motor' from orden inner join usuario on orden.idUsuario = usuario.idUsuario inner join vehiculo on orden.Vehiculo = vehiculo.idVehiculo inner join cita on orden.idCita = cita.idCita where orden.idOrden = "+req.body.idOrden)
 		.then(json=>{
 			res.send(json);
 		})

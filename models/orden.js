@@ -54,8 +54,8 @@ return sequelize.define('orden', {
 	},
 
 	Foto : {
-		type : DataTypes.BLOB,
-		allowNull : true
+		type : DataTypes.STRING,
+		allowNull : false
 	},
 
 	idUsuario : {

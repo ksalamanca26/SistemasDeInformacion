@@ -65,15 +65,8 @@
       </div>
 
     <div class="row">
-            <div class="file-field input-field col s12 m12 l12">
-              <div class="btn waves-effect waves-light">
-                <span>File</span>
-                <input type="file" accept=".png, .jpg, .jpeg" name="Foto"/>
-              </div>
-              <div class="file-path-wrapper">
-                <input class="file-path validate" type="text" (change)="onChange($event)" required [(ngModel)]="foto" name="foto">
-              </div>
-            </div>
+    <input type="file" id="foto" (change)="onChange($event)" [(ngModel)]="foto" accept=".png, .jpg, .jpeg" name="foto">
+              
           </div>
        <button type="submit" class="btn btn-primary">Listo</button>
     </form>        
