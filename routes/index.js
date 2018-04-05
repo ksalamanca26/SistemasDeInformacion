@@ -22,7 +22,7 @@ connection = new sequelize(process.env.JAWSDB_URL, {
      timestamps : false
   }
 
-})
+});
 
 }
 
@@ -39,6 +39,8 @@ connection = new sequelize("easymedic", "root", "password", {
   }
 
 })
+
+ }
 
 
 var transporter = nodemailer.createTransport({
@@ -886,7 +888,7 @@ router.post('/reporte-vehiculo', (req, res, next) =>{
 	}
 
 
-})
+});
 
 
 
