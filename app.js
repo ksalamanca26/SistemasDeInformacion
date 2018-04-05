@@ -14,7 +14,7 @@ var port = process.env.PORT || 8080;
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'angular-src', 'dist')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
 
@@ -22,9 +22,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', routes);
-app.get('/', (req, res) => {
-  res.send('Invalid Endpoint');
-});
 
 app.listen(port, then =>{
 

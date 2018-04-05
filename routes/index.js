@@ -9,10 +9,7 @@ const sequelize= require('sequelize');
 var connection;
 
 
-if(process.env.JAWSDB_URL){
-
-  //Heroku
-connection = new sequelize(process.env.JAWSDB_URL, {
+connection = new sequelize("taller", "root", "password", {
 
   dialect : 'mysql',
 
@@ -23,24 +20,6 @@ connection = new sequelize(process.env.JAWSDB_URL, {
   }
 
 });
-
-}
-
-else{
-
-connection = new sequelize("easymedic", "root", "password", {
-
-  dialect : 'mysql',
-
-  define : {
-
-     freezeTableName : true,
-     timestamps : false
-  }
-
-})
-
- }
 
 
 var transporter = nodemailer.createTransport({
@@ -888,7 +867,7 @@ router.post('/reporte-vehiculo', (req, res, next) =>{
 	}
 
 
-});
+})
 
 
 
