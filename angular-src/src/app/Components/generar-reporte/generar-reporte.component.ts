@@ -67,7 +67,7 @@ export class GenerarReporteComponent implements OnInit {
   		id : cliente.idUsuario
   	}
 
-  	this.authService.todosRol(user).subscribe(data=>{
+  	this.authService.reporteCliente(user).subscribe(data=>{
   		if(data){
   			const json = data[0];
   			console.log(json);

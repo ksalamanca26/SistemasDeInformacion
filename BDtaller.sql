@@ -43,7 +43,7 @@ CREATE TABLE `cita` (
 
 LOCK TABLES `cita` WRITE;
 /*!40000 ALTER TABLE `cita` DISABLE KEYS */;
-INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','Asignada',5,14),(6,'12:00 pm','2018-03-31','Finalizada',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','Asignada',7,14),(9,'2:00 pm','2018-04-03','Finalizada',11,24),(10,'12:00 pm','2018-04-05','Finalizada',12,23),(11,'2:00 pm','2018-04-10','En progreso',10,23),(12,'4:00 pm','2018-04-13','Asignada',12,23);
+INSERT INTO `cita` VALUES (5,'12:00 pm','2018-03-24','En progreso',5,14),(6,'12:00 pm','2018-03-31','Finalizada',10,23),(7,'6:00 pm','2018-04-01','Asignada',5,14),(8,'2:00 pm','2018-04-03','En progreso',7,14),(9,'2:00 pm','2018-04-03','Finalizada',11,24),(10,'12:00 pm','2018-04-05','Finalizada',12,23),(11,'2:00 pm','2018-04-10','En progreso',10,23),(12,'4:00 pm','2018-04-13','En progreso',12,23);
 /*!40000 ALTER TABLE `cita` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,7 +91,7 @@ CREATE TABLE `orden` (
   `idUsuario` int(11) NOT NULL,
   `Vehiculo` int(11) NOT NULL,
   `idCita` int(11) NOT NULL,
-  `Foto` mediumblob,
+  `Foto` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`idOrden`),
   KEY `idusuario_idx` (`idUsuario`),
   KEY `vehiculo_idx` (`Vehiculo`),
@@ -99,7 +99,7 @@ CREATE TABLE `orden` (
   CONSTRAINT `cita` FOREIGN KEY (`idCita`) REFERENCES `cita` (`idCita`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `vehiculoFK` FOREIGN KEY (`Vehiculo`) REFERENCES `vehiculo` (`idVehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -263,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-04-04 18:23:17
+-- Dump completed on 2018-04-05  0:08:30

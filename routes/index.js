@@ -9,7 +9,10 @@ const sequelize= require('sequelize');
 var connection;
 
 
-connection = new sequelize("taller", "root", "password", {
+if(process.env.JAWSDB_URL){
+
+  //Heroku
+connection = new sequelize(process.env.JAWSDB_URL, {
 
   dialect : 'mysql',
 
@@ -19,7 +22,23 @@ connection = new sequelize("taller", "root", "password", {
      timestamps : false
   }
 
-});
+})
+
+}
+
+else{
+
+connection = new sequelize("easymedic", "root", "password", {
+
+  dialect : 'mysql',
+
+  define : {
+
+     freezeTableName : true,
+     timestamps : false
+  }
+
+})
 
 
 var transporter = nodemailer.createTransport({
@@ -835,7 +854,42 @@ transporter.sendMail(mailOptions, function(error, info){
 	}
 
 
+});
+
+
+router.post('/reporte-c', (req, res, next) =>{
+	try{
+
+		connection.query("select orden.*, usuario.Nombre, usuario.Apellido from orden inner join cita on orden.idCita = cita.idCita inner join usuario on cita.idUsuario = usuario.idUsuario where usuario.idUsuario = "+req.body.idUsuario)
+		.then(json=>{
+			res.send(json);
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"});
+	}
+});
+
+
+router.post('/reporte-vehiculo', (req, res, next) =>{
+
+	try{
+		connection.query("select * from orden where idVehiculo = "+req.body.idVehiculo)
+		.then(json=>{
+			res.send(json);
+		})
+	}
+
+	catch(err){
+		res.json({success : false, msg : "Error en el query"})
+	}
+
+
 })
+
+
+
 
 
 
